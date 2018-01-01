@@ -6,6 +6,7 @@
         string country, (currently full country name)
         string rarity,
         int remodel, (0=no remodel, 1=yes)
+        string torpedo, (if ship is torpedo-capable)
         array skills: [
             {name,description,colour},{..},..
         ],
@@ -78,6 +79,12 @@
     stats.speed=tables[1].children[11].innerText.slice(7);
 
     res.stats=stats;
+
+    //check torpedo capable
+    if (parseInt(stats.torpedo))
+    {
+        res.torpedo=1;
+    }
 
     console.log(res);
 })()
