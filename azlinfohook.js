@@ -6,13 +6,17 @@
         string country, (currently full country name)
         string rarity,
         int remodel, (0=no remodel, 1=yes)
-        string torpedo, (if ship is torpedo-capable)
+        string torpedoAble, (if ship is torpedo-capable)
+        string antiairDD, (if dd is an antiair ship)
         array skills: [
             {name,description,colour},{..},..
         ],
         object stats:{
             hp,armour,reload,gun,torpedo,dodge,antiair,planes,gas,speed
         }, (has 10 items)
+        object scaling:{
+            gun,hp,antiair,dodge,planes,torpedo
+        }
     }
 */
 
@@ -59,31 +63,51 @@
 
     res.skills=skills;
 
+    var stattablerows=tables[1].children;
+
     //grabbing stats
     var stats={};
-    var statrow=tables[1].children[8].children;
+    var statrow=stattablerows[8].children;
     stats.hp=statrow[0].innerText;
     stats.armour=statrow[1].innerText;
     stats.reload=statrow[2].innerText;
 
-    statrow=tables[1].children[9].children;
+    statrow=stattablerows[9].children;
     stats.gun=statrow[0].innerText;
     stats.torpedo=statrow[1].innerText;
     stats.dodge=statrow[2].innerText;
 
-    statrow=tables[1].children[10].children;
+    statrow=stattablerows[10].children;
     stats.antiair=statrow[0].innerText;
     stats.planes=statrow[1].innerText;
     stats.gas=statrow[2].innerText;
 
-    stats.speed=tables[1].children[11].innerText.slice(7);
+    stats.speed=stattablerows[11].innerText.slice(7);
 
     res.stats=stats;
+
+    //getting scalings
+    var scaling={};
+    scaling.gun=stattablerows[1].children[0].innerText.slice(-1);
+    scaling.hp=stattablerows[2].children[0].innerText.slice(-1);
+    scaling.antiair=stattablerows[3].children[0].innerText.slice(-1);
+    scaling.dodge=stattablerows[4].children[0].innerText.slice(-1);
+    scaling.planes=stattablerows[5].children[0].innerText.slice(-1);
+    scaling.torpedo=stattablerows[6].children[0].innerText.slice(-1);
+
+    res.scaling=scaling;
 
     //check torpedo capable
     if (parseInt(stats.torpedo))
     {
-        res.torpedo=1;
+        res.torpedoAble=1;
+    }
+
+    //check if antiair dd
+    if (res.class=="DD" &&
+        (scaling.antiair=="C" || scaling.antiair=="B" || scaling.antiair=="A"))
+    {
+        res.antiairDD=1;
     }
 
     console.log(res);
