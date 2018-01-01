@@ -1,3 +1,20 @@
+/*
+    return object:
+    {
+        string name,
+        string class, (ex: "CL" or "DD")
+        string country, (currently full country name)
+        string rarity,
+        int remodel, (0=no remodel, 1=yes)
+        array skills: [
+            {name,description,colour},{..},..
+        ],
+        object stats:{
+            hp,armour,reload,gun,torpedo,dodge,antiair,planes,gas,speed
+        }, (has 10 items)
+    }
+*/
+
 (()=>{
     var doc=document;
     var res={};
