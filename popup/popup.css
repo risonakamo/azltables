@@ -3,7 +3,7 @@
 body
 {
     margin: 0;
-    font-family: roboto;
+    font-family: roboto,meiryo,"Segoe UI",Arial;
 }
 
 p
@@ -51,55 +51,60 @@ p
 }
 
 /*-- right side --*/
-.ship-table .right
+.right
 {
-    width: 230px;
-    height: 136px;
+    width: 300px;
     padding-left: 10px;
     box-sizing: border-box;
 }
 
-.right .title
-{
-    height: 30px;
-    font-size: 25px;
-    color: #4a3d3a;
-}
-
-.title img
-{
-    height: 30px;
-}
-
+/*-- skill zone --*/
 .right .skill-zone
 {
     width: 100%;
+}
+
+.skill-zone .skill-box
+{
+    width: 100%;
     border-radius: 4px;
+    margin: 4px 0 4px 0;
     overflow: hidden;
 }
 
-.skill-zone .skill-row
+.skill-box > div
 {
-    height: 32px;
     width: 100%;
-    font-size: 20px;
-    padding: 4px 12px 4px 12px;
     box-sizing: border-box;
-    color: #313131;
-    /* color: white; */
 }
 
-.skill-zone .skill-row.blue
+.skill-box .name
 {
-    background-color: #4abade;
+    height: 18px;
+    background-color: #313131;
+    font-size: 13px;
+    padding: 2px 8px 2px 8px;
 }
 
-.skill-zone .skill-row.yellow
+.skill-box .name.yellow
 {
-    background-color: #b5b642;
+    color: #b5ba4a;
 }
 
-.skill-zone .skill-row.red
+.skill-box .name.blue
 {
-    background-color: #de555a;
+    color: #4abee6;
+}
+
+.skill-box .name.red
+{
+    color: #de595a;
+}
+
+.skill-box .description
+{
+    font-size: 14px;
+    color: #4a3d3a;
+    background-color: #efdbde;
+    padding: 3px 8px 3px 8px;
 }
