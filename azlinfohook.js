@@ -5,6 +5,7 @@
         string class, (ex: "CL" or "DD")
         string country, (currently full country name)
         string rarity,
+        string image,
         int remodel, (0=no remodel, 1=yes)
         string torpedoAble, (if ship is torpedo-capable)
         string antiairDD, (if dd is an antiair ship)
@@ -26,9 +27,10 @@
     var tables=doc.querySelectorAll(".wikitable tbody");
 
     res.name=doc.querySelector("#firstHeading").innerText;
-    res.class=tables[0].children[3].children[3].children[0].innerText;
+    res.class=tables[0].children[3].children[3].firstElementChild.innerText;
     res.country=tables[0].children[2].children[1].children[1].innerText;
     res.rarity=tables[0].children[1].children[4].innerHTML.split("<br>")[0];
+    res.image=tables[0].children[1].firstElementChild.firstElementChild.firstElementChild.src;
 
     //identifying if remodel
     res.remodel=0;
@@ -68,19 +70,19 @@
     //grabbing stats
     var stats={};
     var statrow=stattablerows[8].children;
-    stats.hp=statrow[0].innerText;
+    stats.hp=statrow[0].innerText.split("→").pop();
     stats.armour=statrow[1].innerText;
-    stats.reload=statrow[2].innerText;
+    stats.reload=statrow[2].innerText.split("→").pop();
 
     statrow=stattablerows[9].children;
-    stats.gun=statrow[0].innerText;
-    stats.torpedo=statrow[1].innerText;
-    stats.dodge=statrow[2].innerText;
+    stats.gun=statrow[0].innerText.split("→").pop();
+    stats.torpedo=statrow[1].innerText.split("→").pop();
+    stats.dodge=statrow[2].innerText.split("→").pop();
 
     statrow=stattablerows[10].children;
-    stats.antiair=statrow[0].innerText;
-    stats.planes=statrow[1].innerText;
-    stats.gas=statrow[2].innerText;
+    stats.antiair=statrow[0].innerText.split("→").pop();
+    stats.planes=statrow[1].innerText.split("→").pop();
+    stats.gas=statrow[2].innerText.split("→").pop();
 
     stats.speed=stattablerows[11].innerText.slice(7);
 
