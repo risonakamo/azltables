@@ -1,0 +1,12 @@
+{
+    "manifest_version":2,
+    "name":"azltables",
+    "version":"1.0.0",
+    "description":"save information from english azurlane wiki",
+
+    "permissions":["tabs","https://azurlane.koumakan.jp/*"],
+
+    "browser_action":{
+        "default_popup":"popup/popup.html"
+    }
+}
