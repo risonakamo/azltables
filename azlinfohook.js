@@ -9,14 +9,17 @@
         int remodel, (0=no remodel, 1=yes)
         string torpedoAble, (if ship is torpedo-capable)
         string antiairDD, (if dd is an antiair ship)
+
         array skills: [
-            {name,description,colour},{..},..
+            {string name,description,colour},{..},..
         ],
+
         object stats:{
-            hp,armour,reload,gun,torpedo,dodge,antiair,planes,gas,speed
+            int hp,armour,reload,gun,torpedo,dodge,antiair,planes,gas,speed
         }, (has 10 items)
+
         object scaling:{
-            gun,hp,antiair,dodge,planes,torpedo
+            char gun,hp,antiair,dodge,planes,torpedo
         }
     }
 */
