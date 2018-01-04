@@ -106,6 +106,7 @@ span
 
 .equip-box .equip-holder
 {
+    width: 100%;
     background-color: #efdfde;
     border-radius: 12px;
     box-sizing: border-box;
@@ -121,12 +122,12 @@ span
 
 .equip-box .centre
 {
-    margin-left: 30px;
+    margin-left: 38px;
 }
 
 .equip-box .equipbox-right
 {
-    margin-left: 60px;
+    margin-left: 68px;
 }
 
 .equip-box .squish
