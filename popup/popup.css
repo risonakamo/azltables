@@ -201,7 +201,7 @@ span
     font-size: 14px;
     color: #4a3d3a;
     background-color: #efdbde;
-    box-shadow: inset 0px 3px 6px 0px rgba(0, 0, 0, 0.35);
+    /* box-shadow: inset 0px 3px 6px 0px rgba(0, 0, 0, 0.35); */
     padding: 3px 8px 3px 8px;
 }
 
@@ -211,6 +211,13 @@ span
     width: 200px;
     padding-left: 10px;
     box-sizing: border-box;
+}
+
+.right-right .title-bar
+{
+    height: 5px;
+    background-color: black;
+    width: 100%;
 }
 
 /*-- stat list/boxes --*/
