@@ -89,6 +89,11 @@ span
     background-color: #efaa31;
 }
 
+.class-box img
+{
+    height: 20px;
+}
+
 .class-box .label
 {
     height: 20px;
