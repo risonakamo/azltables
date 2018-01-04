@@ -207,3 +207,90 @@ span
 {
     width: auto;
 }
+
+/*-- scalestat --*/
+.img-holder .scalestat
+{
+    height: 25px;
+    width: 25px;
+}
+
+.scalestat.hp
+{
+    -webkit-mask-image: url("icon/hp.png");
+}
+
+.scalestat.gun
+{
+    -webkit-mask-image: url("icon/gun.png");
+}
+
+.scalestat.torp
+{
+    -webkit-mask-image: url("icon/torp.png");
+}
+
+.scalestat.dodge
+{
+    -webkit-mask-image: url("icon/dodge.png");
+}
+
+.scalestat.plane
+{
+    -webkit-mask-image: url("icon/plane.png");
+}
+
+.scalestat.aa
+{
+    -webkit-mask-image: url("icon/aa.png");
+}
+
+.statbox.A .scalestat
+{
+    background-color: #cea642;
+}
+
+.statbox.A .text
+{
+    color: #cea642;
+}
+
+.statbox.B .scalestat
+{
+    background-color: #9c68ba;
+}
+
+.statbox.B .text
+{
+    color: #9c68ba;
+}
+
+.statbox.C .scalestat
+{
+    background-color: #71bfef;
+}
+
+.statbox.C .text
+{
+    color: #71bfef;
+}
+
+.statbox.D .scalestat
+{
+    background-color: #848284;
+}
+
+.statbox.D .text
+{
+    color: #848284;
+}
+
+.statbox.E .scalestat
+{
+    background-color: #bd8673;
+}
+
+.statbox.E .text
+{
+    color: #bd8673;
+}
