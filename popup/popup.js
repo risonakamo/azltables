@@ -1,5 +1,7 @@
 window.onload=main;
 
+var _currentShip;
+
 function main()
 {
     initButtons();
@@ -7,7 +9,8 @@ function main()
         if (tab[0].url.slice(0,28)=="https://azurlane.koumakan.jp")
         {
             chrome.tabs.executeScript({file:"azlinfohook.js"},(res)=>{
-                document.querySelector(".current-ship").innerHTML=genShipTable(res[0]);
+                _currentShip=res[0];
+                document.querySelector(".current-ship").innerHTML=genShipTable(_currentShip);
             });
         }
     });
@@ -24,6 +27,32 @@ function initButtons()
     });
 
     buttons[1].addEventListener("click",(e)=>{
+        chrome.storage.local.get(_currentShip.class,(data)=>{
+            var d=data[_currentShip.class];
 
+            if (!d)
+            {
+                d=[];
+            }
+
+            var alreadyExist=0;
+            for (var x=0,l=d.length;x<l;x++)
+            {
+                if (d[x].name==_currentShip.name)
+                {
+                    d[x]=_currentShip;
+                    alreadyExist=1;
+                    break;
+                }
+            }
+
+            if (!alreadyExist)
+            {
+                d.push(_currentShip);
+            }
+
+            data[_currentShip.class]=d;
+            chrome.storage.local.set(data);
+        });
     });
 }

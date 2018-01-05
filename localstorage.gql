@@ -1,12 +1,6 @@
 # top level chrome storage
 type localStorage
 {
-    ships:ships, #object of all savedships
-    fleets:[[ship]] #custom lists creatable by user
-}
-
-type ships
-{
     DD:[ship],
     CL:[ship],
     CA:[ship],
@@ -14,6 +8,8 @@ type ships
     CV:[ship],
     CVL:[ship],
     AR:[ship],
+
+    fleets:[[string]] #custom lists creatable by user, where string is a ship's name
 }
 
 type ship

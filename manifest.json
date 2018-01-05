@@ -4,7 +4,7 @@
     "version":"1.0.0",
     "description":"save information from english azurlane wiki",
 
-    "permissions":["tabs","https://azurlane.koumakan.jp/*"],
+    "permissions":["tabs","storage","https://azurlane.koumakan.jp/*"],
 
     "browser_action":{
         "default_popup":"popup/popup.html"
