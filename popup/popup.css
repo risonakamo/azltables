@@ -114,7 +114,7 @@ span
 {
     width: 100%;
     text-align: center;
-    margin-top: 3px;
+    margin-top: 6px;
     background-color: #efdfde;
     border-radius: 5px;
     overflow: hidden;
@@ -129,7 +129,7 @@ span
 
 .equip-box .equip-title
 {
-    width: 68px;
+    width: 60px;
     height: 30px;
     font-size: 11px;
     color: #313131;
