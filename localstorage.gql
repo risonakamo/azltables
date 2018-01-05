@@ -1,0 +1,56 @@
+# top level chrome storage
+type localStorage
+{
+    ships:ships, #object of all savedships
+    fleets:[[ship]] #custom lists creatable by user
+}
+
+type ships
+{
+    DD:[ship],
+    CL:[ship],
+    CA:[ship],
+    BB:[ship],
+    CV:[ship],
+    CVL:[ship],
+    AR:[ship],
+}
+
+type ship
+{
+    # literally a ship object made from info hook
+    name: string,
+    class: string,
+    country: string,
+    rarity: string,
+    image: string,
+    remodel: int,
+    torpedoAble: null string,
+    antiairDD: null string,
+    skills:[{
+        name: string,
+        description: string,
+        colourL string
+    }],
+    stats:{
+        hp: int,
+        armour: string,
+        reload: int,
+        gun: int,
+        torpedo: int,
+        dodge: int,
+        antiair: int,
+        planes: int,
+        gas: int,
+        speed: int,
+    },
+    scaling:{
+        gun: char,
+        hp: char,
+        antiair: char,
+        dodge: char,
+        planes: char,
+        torpedo: char
+    },
+    equipment:[int] #must be size 3
+}
