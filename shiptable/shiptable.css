@@ -77,8 +77,14 @@ span
     width: 100%;
     border-radius: 4px;
     overflow: hidden;
+    background-color: black;
     /* border: 4px solid #5A09BD; */
     /* box-shadow: 0 2px 10px 0 rgba(0,0,0,0.1), 0 1px 18px 0 rgba(0,0,0,0.1), 0 3px 5px -1px rgba(0,0,0,0.05); */
+}
+
+.portrait-zone .portrait
+{
+    border: 4px solid black;
 }
 
 /*-- rarity colours --*/
@@ -89,7 +95,7 @@ span
 
 .portrait-zone.purple .portrait
 {
-    border: 4px solid #8c71ce;
+    border-color:  #8c71ce;
 }
 
 .left .portrait-zone.gold
@@ -99,7 +105,7 @@ span
 
 .portrait-zone.gold .portrait
 {
-    border: 4px solid #f7eb84;
+    border-color:  #f7eb84;
 }
 
 .left .portrait-zone.blue
@@ -109,7 +115,7 @@ span
 
 .portrait-zone.blue .portrait
 {
-    border: 4px solid #8cc6de;
+    border-color:  #8cc6de;
 }
 
 .left .portrait-zone.grey
@@ -119,7 +125,7 @@ span
 
 .portrait-zone.grey .portrait
 {
-    border: 4px solid #adaead;
+    border-color:  #adaead;
 }
 
 .left .class-box

@@ -34,7 +34,7 @@
     res.name=doc.querySelector("#firstHeading").innerText;
     res.class=tables[0].children[3].children[3].firstElementChild.innerText;
     res.country=tables[0].children[2].children[1].children[1].innerText;
-    res.rarity=tables[0].children[1].children[4].innerHTML.split("<br>")[0];
+    res.rarity=rareToColour(tables[0].children[1].children[4].innerHTML.split("<br>")[0]);
     res.image=tables[0].children[1].firstElementChild.firstElementChild.firstElementChild.src;
 
     //identifying if remodel
@@ -185,5 +185,23 @@ function convertSkillColour(colour)
         return "red";
 
         return "";
+    }
+}
+
+function rareToColour(rarity)
+{
+    switch(rarity)
+    {
+        case "Elite":
+        return "purple";
+
+        case "Super Rare":
+        return "gold";
+
+        case "Rare":
+        return "blue";
+
+        case "Normal":
+        return "grey";
     }
 }

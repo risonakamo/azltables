@@ -7,12 +7,12 @@
 
   <div class="bottom">
     <div class="left">
-      <div class="portrait-zone">
+      <div class="portrait-zone ${data.rarity}">
         <div class="class-box ${data.class}">
           ${genClassString(data.class,data.antiairDD,data.torpedoAble,data.remodel)}
         </div>
 
-        <img src="${data.image}">
+        <img class="portrait" src="${data.image}">
       </div>
 
       <div class="equip-box">
