@@ -20,7 +20,9 @@
 
         object scaling:{
             char gun,hp,antiair,dodge,planes,torpedo
-        }
+        },
+
+        int-array equipment (integers corresponding to equipment image names)
     }
 */
 
@@ -115,6 +117,56 @@
         res.antiairDD=1;
     }
 
+    //grab equipment
+    var equiptable=tables[4].children;
+    res.equipment=[];
+    res.equipment.push(equipTexttoNum(equiptable[2].children[3].innerText));
+    res.equipment.push(equipTexttoNum(equiptable[3].children[3].innerText));
+    res.equipment.push(equipTexttoNum(equiptable[4].children[3].innerText));
+
     console.log(res);
     return res;
 })()
+
+function equipTexttoNum(text)
+{
+    switch (text)
+    {
+        case "DD Main Guns":
+        return 0;
+
+        case "CA Main Guns":
+        return 1;
+
+        case "BB Main Guns":
+        return 2;
+
+        case "CL Main Guns":
+        return 3;
+
+        case "Torpedoes":
+        return 4;
+
+        case "Fighter":
+        return 5;
+
+        case "Dive Bomber":
+        return 6;
+
+        case "Torpedo Bomber":
+        return 7;
+
+        case "Auxiliary Equipment":
+        return 8;
+
+        case "Anti-Air Guns":
+        return 9;
+
+        case "DD/CL Main Guns (Seaplane on retrofit)":
+        case "DD/CL Main Guns":
+        case "CL Guns, DD guns":
+        return 11;
+
+        return 12;
+    }
+}
