@@ -64,7 +64,7 @@
         skills.push({
             name:skilltablerows[x].children[2].innerText,
             description:skilltablerows[x].children[3].innerText,
-            colour:skillcolour
+            colour:convertSkillColour(skillcolour)
         });
     }
 
@@ -89,7 +89,7 @@
     stats.planes=statrow[1].innerText.split("→").pop();
     stats.gas=statrow[2].innerText.split("→").pop();
 
-    stats.speed=stattablerows[11].innerText.slice(7);
+    stats.speed=stattablerows[11].innerText.slice(7).split("→").pop();
 
     res.stats=stats;
 
@@ -168,5 +168,22 @@ function equipTexttoNum(text)
         return 11;
 
         return 12;
+    }
+}
+
+function convertSkillColour(colour)
+{
+    switch(colour)
+    {
+        case "gold":
+        return "yellow";
+
+        case "deepskyblue":
+        return "blue";
+
+        case "pink":
+        return "red";
+
+        return "";
     }
 }
