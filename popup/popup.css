@@ -94,7 +94,42 @@ span
     width: 100%;
     height: 20px;
     text-align: center;
-    background-color: #efaa31;
+    background-color: #313131;
+}
+
+.class-box.CL
+{
+    background-color: #f7db84;
+}
+
+.class-box.CA
+{
+    background-color: #deaa31;
+}
+
+.class-box.CV
+{
+    background-color: #927cf3;
+}
+
+.class-box.CVL
+{
+    background-color: #d7c5f2;
+}
+
+.class-box.BB
+{
+    background-color: #ff695a;
+}
+
+.class-box.DD
+{
+    background-color: #63c2f7;
+}
+
+.class-box.AR
+{
+    background-color: #42dead;
 }
 
 .class-box img
