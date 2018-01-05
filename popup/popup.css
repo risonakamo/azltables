@@ -127,6 +127,16 @@ span
     padding: 5px;
 }
 
+.equip-box .equip-title
+{
+    width: 68px;
+    height: 30px;
+    font-size: 11px;
+    color: #313131;
+    text-align: left;
+    line-height: 30px;
+}
+
 .equip-box img
 {
     display: block;
@@ -141,7 +151,9 @@ span
 
 .equip-box .equipbox-right
 {
-    margin-left: 68px;
+    display: inline-block;
+    vertical-align: top;
+    /* margin-left: 68px; */
 }
 
 .equip-box .squish
