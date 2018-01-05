@@ -16,6 +16,12 @@ span
     vertical-align: top;
 }
 
+/*-- popup buttons --*/
+.button
+{
+    cursor: pointer;
+}
+
 /*-- ship table top level --*/
 .ship-table
 {
