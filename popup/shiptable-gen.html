@@ -8,9 +8,8 @@
   <div class="bottom">
     <div class="left">
       <div class="portrait-zone">
-        <div class="class-box">
-          <img src="class/cl.png">
-          <div class="label">CL</div>
+        <div class="class-box ${data.class}">
+          ${genClassString(data.class,data.antiairDD,data.torpedoAble,data.remodel)}
         </div>
 
         <img src="${data.image}">

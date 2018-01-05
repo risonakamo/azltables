@@ -95,16 +95,17 @@ span
     height: 20px;
     text-align: center;
     background-color: #313131;
+    line-height: 20px;
 }
 
 .class-box.CL
 {
-    background-color: #f7db84;
+    background-color: #deaa31;
 }
 
 .class-box.CA
 {
-    background-color: #deaa31;
+    background-color: #c57d21;
 }
 
 .class-box.CV
@@ -134,7 +135,8 @@ span
 
 .class-box img
 {
-    height: 20px;
+    height: 16px;
+    margin: 2px 2px 0 2px;
 }
 
 .class-box .label
@@ -142,6 +144,7 @@ span
     height: 20px;
     font-size: 15px;
     color: white;
+    margin: 0 2px 0 2px;
 }
 
 /*-- equipment box --*/
@@ -367,12 +370,12 @@ span
     -webkit-mask-image: url("icon/aa.png");
 }
 
-.statbox.A .scalestat
+.statbox.A .scalestat,.statbox.S .scalestat
 {
     background-color: #cea642;
 }
 
-.statbox.A .text
+.statbox.A .text,.statbox.S .text
 {
     color: #cea642;
 }
