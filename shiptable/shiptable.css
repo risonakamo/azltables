@@ -3,9 +3,10 @@ p
     margin: 0;
 }
 
-span
+a
 {
     vertical-align: top;
+    text-decoration: none;
 }
 
 /*-- ship table top level --*/
@@ -58,7 +59,7 @@ span
     margin-top: -7px;
 }
 
-.title-box span
+.title-box a
 {
     height: 100%;
     font-size: 25px;

@@ -1,4 +1,5 @@
 /*
+    see localstorage.gql for updated return object definition (the ship object)
     return object:
     {
         string name,
@@ -41,6 +42,7 @@
     res.country=countryConvert(tables[0].children[2].children[1].children[1].innerText);
     res.rarity=rareToColour(tables[0].children[1].children[4].innerHTML.split("<br>")[0]);
     res.image=tables[0].children[1].firstElementChild.firstElementChild.firstElementChild.src;
+    res.link=window.location.href;
 
     //identifying if remodel
     res.remodel=0;

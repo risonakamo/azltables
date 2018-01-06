@@ -23,6 +23,7 @@ type ship
     remodel: int,
     torpedoAble: null string,
     antiairDD: null string,
+    link: string,
     skills:[{
         name: string,
         description: string,
