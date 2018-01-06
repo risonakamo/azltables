@@ -32,6 +32,7 @@ function initButtons()
         });
     });
 
+    var button1Text=buttons[1].querySelector("span");
     buttons[1].addEventListener("click",(e)=>{
         chrome.storage.local.get(_currentShip.class,(data)=>{
             var d=data[_currentShip.class];
@@ -59,6 +60,9 @@ function initButtons()
 
             data[_currentShip.class]=d;
             chrome.storage.local.set(data);
+
+            buttons[1].classList.add("complete");
+            button1Text.innerText="saved";
         });
     });
 }
