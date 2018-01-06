@@ -10,6 +10,12 @@ function main()
         {
             chrome.tabs.executeScript({file:"azlinfohook.js"},(res)=>{
                 _currentShip=res[0];
+
+                if (!_currentShip)
+                {
+                    return;
+                }
+
                 document.querySelector(".current-ship").innerHTML=genShipTable(_currentShip);
             });
         }

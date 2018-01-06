@@ -31,6 +31,11 @@
     var res={};
     var tables=doc.querySelectorAll(".wikitable tbody");
 
+    if (!tables)
+    {
+        return 0;
+    }
+
     res.name=doc.querySelector("#firstHeading").innerText;
     res.class=tables[0].children[3].children[3].firstElementChild.innerText;
     res.country=countryConvert(tables[0].children[2].children[1].children[1].innerText);
