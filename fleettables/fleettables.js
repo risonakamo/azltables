@@ -23,3 +23,8 @@ function main()
         }
     });
 }
+
+function clearShipData()
+{
+    chrome.storage.local.clear();
+}

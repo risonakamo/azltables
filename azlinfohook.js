@@ -33,7 +33,7 @@
 
     res.name=doc.querySelector("#firstHeading").innerText;
     res.class=tables[0].children[3].children[3].firstElementChild.innerText;
-    res.country=tables[0].children[2].children[1].children[1].innerText;
+    res.country=countryConvert(tables[0].children[2].children[1].children[1].innerText);
     res.rarity=rareToColour(tables[0].children[1].children[4].innerHTML.split("<br>")[0]);
     res.image=tables[0].children[1].firstElementChild.firstElementChild.firstElementChild.src;
 
@@ -166,14 +166,14 @@ function equipTexttoNum(text)
         case "DD/CL Main Guns":
         case "CL Guns, DD guns":
         return 11;
-
-        return 12;
     }
+
+    return 12;
 }
 
 function convertSkillColour(colour)
 {
-    switch(colour)
+    switch (colour)
     {
         case "gold":
         return "yellow";
@@ -183,14 +183,14 @@ function convertSkillColour(colour)
 
         case "pink":
         return "red";
-
-        return "";
     }
+
+    return "";
 }
 
 function rareToColour(rarity)
 {
-    switch(rarity)
+    switch (rarity)
     {
         case "Elite":
         return "purple";
@@ -204,4 +204,24 @@ function rareToColour(rarity)
         case "Normal":
         return "grey";
     }
+}
+
+function countryConvert(country)
+{
+    switch (country)
+    {
+        case "Metalblood":
+        return "de";
+
+        case "Royal Navy":
+        return "en";
+
+        case "Sakura Empire":
+        return "jp";
+
+        case "Eagle Union":
+        return "us";
+    }
+
+    return "missing";
 }

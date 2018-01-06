@@ -43,11 +43,19 @@ span
     background-color: #e6dbd6;
     padding-left: 25px;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .title-box img
 {
-    height: 30px;
+    /* height: 30px; */
+    height: 50px;
+    margin-top: -10px;
+}
+
+.title-box img.de
+{
+    margin-top: -7px;
 }
 
 .title-box span
