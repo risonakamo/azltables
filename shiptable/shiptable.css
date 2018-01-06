@@ -137,6 +137,7 @@ a
     border-color:  #adaead;
 }
 
+/*-- classbox classes --*/
 .left .class-box
 {
     width: 100%;
@@ -179,6 +180,11 @@ a
 .class-box.AR
 {
     background-color: #42dead;
+}
+
+.class-box.BM
+{
+    background-color: #ab3d47;
 }
 
 .class-box img

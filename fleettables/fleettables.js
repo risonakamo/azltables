@@ -3,7 +3,7 @@ window.onload=main;
 function main()
 {
     var ftables=document.querySelector(".ftables");
-    var shipClasses=["DD","CL","CA","BB","CV","CVL","AR"];
+    var shipClasses=["DD","CL","CA","BB","BM","CV","CVL","AR"];
     chrome.storage.local.get(shipClasses,(data)=>{
 
         var currentClassShips;
