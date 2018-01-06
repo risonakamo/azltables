@@ -19,9 +19,11 @@ span
 /*-- popup buttons --*/
 .buttons
 {
-    height: 46px;
+    height: 30px;
     white-space: nowrap;
     font-size: 0;
+    margin: 0 10px 10px 10px;
+    text-align: right;
 }
 
 .button
@@ -34,7 +36,7 @@ span
     color: #544243;
     overflow: hidden;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 -1px 1px 0 rgba(0, 0, 0, 0.1), 1px 2px 4px 0 rgba(0, 0, 0, 0.07), -1px 2px 4px 0 rgba(0, 0, 0, 0.07);
-    margin: 8px;
+    margin: 0 4px 0 4px;
     cursor: pointer;
     font-size: 16px;
     line-height: 30px;
