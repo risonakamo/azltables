@@ -59,6 +59,7 @@ body
 .inline-contain .label
 {
     position: absolute;
+    visibility: hidden;
     height: 18px;
     top: 5px;
     right: 100%;
@@ -68,6 +69,15 @@ body
     background-color: #313131;
     padding: 0 6px 2px 6px;
     border-radius: 4px;
+    opacity: 0;
+    transition: visibility 0s .15s,opacity .15s;
+}
+
+.fleet-entry .inline-contain:hover .label
+{
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .15s;
 }
 
 .fleet-entry img
