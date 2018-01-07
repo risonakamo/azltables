@@ -1,5 +1,7 @@
 window.onload=main;
 
+var menucontroller;
+
 function main()
 {
     var ftables=document.querySelector(".ftables");

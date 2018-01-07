@@ -33,7 +33,6 @@ body
     bottom: 81px;
     right: 25px;
     font-size: 0;
-    background-color: blue;
     box-sizing: border-box;
     overflow: auto;
     /* background-color: rgba(255,255,255,.5); */
