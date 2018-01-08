@@ -1,16 +1,17 @@
 window.onload=main;
 
 var menucontroller;
+var _shipClasses;
 
 function main()
 {
     var ftables=document.querySelector(".ftables");
-    var shipClasses=["DD","CL","CA","BB","BM","CV","CVL","AR"];
-    chrome.storage.local.get(shipClasses,(data)=>{
+    _shipClasses=["DD","CL","CA","BB","BM","CV","CVL","AR"];
+    chrome.storage.local.get(_shipClasses,(data)=>{
         var currentClassShips;
-        for (var x=0;x<shipClasses.length;x++)
+        for (var x=0;x<_shipClasses.length;x++)
         {
-            currentClassShips=data[shipClasses[x]];
+            currentClassShips=data[_shipClasses[x]];
 
             if (!currentClassShips)
             {

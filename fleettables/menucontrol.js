@@ -3,10 +3,12 @@ class _menucontroller
     constructor()
     {
         this.buttons=document.querySelectorAll(".menu-operations .button");
+        this.buttonsText=[];
         this.shiptableContainer=document.querySelector(".ftables");
         this.shiptables=this.shiptableContainer.querySelectorAll(".ship-table");
 
         this.deleteMode=0;
+        this.clearMode=0;
 
         this.initButtons();
         this.initShipEvents();
@@ -15,24 +17,49 @@ class _menucontroller
     initButtons()
     {
         //remove ship button
-        var buttonText=this.buttons[0].querySelector("span");
+        this.buttonsText.push(this.buttons[0].querySelector("span"));
         this.buttons[0].addEventListener("click",(e)=>{
+            if (this.clearMode)
+            {
+                this.clearMode=0;
+                this.buttonsText[0].innerText="remove ship";
+                this.buttonsText[1].innerText="clear all";
+                return;
+            }
+
             if (!this.deleteMode)
             {
                 this.deleteMode=1;
                 this.shiptableContainer.classList.add("delete-mode");
-                buttonText.innerText="end remove";
+                this.buttonsText[0].innerText="end remove";
             }
 
             else
             {
                 this.deleteMode=0;
                 this.shiptableContainer.classList.remove("delete-mode");
-                buttonText.innerText="remove";
+                this.buttonsText[0].innerText="remove ship";
             }
         });
 
+        this.buttonsText.push(this.buttons[1].querySelector("span"));
+        this.buttons[1].addEventListener("click",(e)=>{
+            if (!this.clearMode)
+            {
+                this.clearMode=1;
+                this.buttonsText[0].innerText="cancel clear";
+                this.buttonsText[1].innerText="confirm clear all!!!!!!!!!";
+            }
 
+            else
+            {
+                this.clearMode=0;
+                this.buttonsText[0].innerText="remove ship";
+                this.buttonsText[1].innerText="clear all";
+                this.shiptableContainer.innerHTML="";
+                chrome.storage.local.remove(_shipClasses);
+            }
+        });
     }
 
     initShipEvents()
