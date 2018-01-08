@@ -13,4 +13,5 @@ class _menucontroller
 
     void initButtons();
     void initShipEvents();
+    void toggleButtonHide(array hideButtons);
 }

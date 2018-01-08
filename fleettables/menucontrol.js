@@ -24,6 +24,7 @@ class _menucontroller
                 this.clearMode=0;
                 this.buttonsText[0].innerText="remove ship";
                 this.buttonsText[1].innerText="clear all";
+                this.toggleButtonHide([2,3]);
                 return;
             }
 
@@ -32,6 +33,7 @@ class _menucontroller
                 this.deleteMode=1;
                 this.shiptableContainer.classList.add("delete-mode");
                 this.buttonsText[0].innerText="end remove";
+                this.toggleButtonHide([1,2,3]);
             }
 
             else
@@ -39,6 +41,7 @@ class _menucontroller
                 this.deleteMode=0;
                 this.shiptableContainer.classList.remove("delete-mode");
                 this.buttonsText[0].innerText="remove ship";
+                this.toggleButtonHide([1,2,3]);
             }
         });
 
@@ -49,6 +52,7 @@ class _menucontroller
                 this.clearMode=1;
                 this.buttonsText[0].innerText="cancel clear";
                 this.buttonsText[1].innerText="confirm clear all!!!!!!!!!";
+                this.toggleButtonHide([2,3]);
             }
 
             else
@@ -57,6 +61,7 @@ class _menucontroller
                 this.buttonsText[0].innerText="remove ship";
                 this.buttonsText[1].innerText="clear all";
                 this.shiptableContainer.innerHTML="";
+                this.toggleButtonHide([2,3]);
                 chrome.storage.local.remove(_shipClasses);
             }
         });
@@ -91,6 +96,14 @@ class _menucontroller
                     this.shiptableContainer.removeChild(e.currentTarget);
                 }
             });
+        }
+    }
+
+    toggleButtonHide(hideButtons)
+    {
+        for (var x=0;x<hideButtons.length;x++)
+        {
+            this.buttons[hideButtons[x]].classList.toggle("hidden");
         }
     }
 }

@@ -5,6 +5,7 @@ body
     margin: 0;
 }
 
+/*-- menu --*/
 .menu-hover-button
 {
     position: fixed;
@@ -27,6 +28,12 @@ body
     box-sizing: border-box;
 }
 
+.menu-operations .button.hidden
+{
+    display: none;
+}
+
+/*-- fleet list general --*/
 .fleet-list
 {
     position: fixed;
