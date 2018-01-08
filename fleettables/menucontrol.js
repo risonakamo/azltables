@@ -5,8 +5,10 @@ class _menucontroller
         this.buttons=document.querySelectorAll(".menu-operations .button");
         this.shiptables=document.querySelectorAll(".ship-table");
 
-        console.log(this.shiptables);
+        this.deleteMode=0;
+
         this.initButtons();
+        this.initShipEvents();
     }
 
     initButtons()
@@ -14,5 +16,15 @@ class _menucontroller
         this.buttons[0].addEventListener("click",(e)=>{
 
         });
+    }
+
+    initShipEvents()
+    {
+        for (var x=0,l=this.shiptables.length;x<l;x++)
+        {
+            this.shiptables[x].addEventListener("click",(e)=>{
+                console.log("a");
+            });
+        }
     }
 }

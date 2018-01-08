@@ -7,7 +7,6 @@ function main()
     var ftables=document.querySelector(".ftables");
     var shipClasses=["DD","CL","CA","BB","BM","CV","CVL","AR"];
     chrome.storage.local.get(shipClasses,(data)=>{
-
         var currentClassShips;
         for (var x=0;x<shipClasses.length;x++)
         {
@@ -23,6 +22,8 @@ function main()
                 ftables.insertAdjacentHTML("beforeend",genShipTable(currentClassShips[y]));
             }
         }
+
+        menucontroller=new _menucontroller;
     });
 }
 
