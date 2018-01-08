@@ -40,6 +40,25 @@ class _menucontroller
             this.shiptables[x].addEventListener("click",(e)=>{
                 if (this.deleteMode)
                 {
+                    var name=e.currentTarget.children[0].children[1].innerText;
+
+                    var deleteClass=e.currentTarget.querySelector(".class-box .label").innerText;
+                    chrome.storage.local.get(deleteClass,(d)=>{
+                        var data=d[deleteClass];
+
+                        for (var x=0,l=data.length;x<l;x++)
+                        {
+                            if (data[x].name==name)
+                            {
+                                data.splice(x,1);
+                                break;
+                            }
+                        }
+
+                        d[deleteClass]=data;
+                        chrome.storage.local.set(d);
+                    });
+
                     this.shiptableContainer.removeChild(e.currentTarget);
                 }
             });
