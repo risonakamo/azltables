@@ -26,8 +26,3 @@ function main()
         menucontroller=new _menucontroller;
     });
 }
-
-function clearShipData()
-{
-    chrome.storage.local.clear();
-}

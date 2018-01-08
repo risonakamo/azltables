@@ -38,6 +38,11 @@
     opacity: 0;
 }
 
+.button:active .not-selected,.button:active .selected
+{
+    opacity: 0;
+}
+
 .button .gradientback.selected
 {
     background: linear-gradient(to bottom, rgb(255, 228, 197) 0%, rgb(255, 194, 134) 100%);
@@ -47,10 +52,16 @@
 .button .gradientback.complete
 {
     background: linear-gradient(to bottom, rgb(149,231,105) 0%, rgb(95,202,56) 100%);
+    z-index: -13;
+}
+
+.button .gradientback.focus
+{
+    background: linear-gradient(to bottom, #a56524 0%, #a57c4f 100%);
     z-index: -12;
 }
 
-.button.complete .not-selected,.button.complete .selected
+.button.complete .not-selected,.button.complete .selected,.button.complete .focus
 {
     opacity: 0;
 }

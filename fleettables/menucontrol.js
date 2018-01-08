@@ -31,6 +31,8 @@ class _menucontroller
                 buttonText.innerText="remove";
             }
         });
+
+
     }
 
     initShipEvents()

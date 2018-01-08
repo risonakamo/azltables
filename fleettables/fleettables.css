@@ -23,6 +23,8 @@ body
     text-align: right;
     bottom: 25px;
     right: 81px;
+    padding-top: 11px;
+    box-sizing: border-box;
 }
 
 .fleet-list
