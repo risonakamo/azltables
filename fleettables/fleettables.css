@@ -33,6 +33,7 @@ body
     display: none;
 }
 
+/*-- menu text input bar --*/
 .menu-operations .menu-input
 {
     display: inline-block;
@@ -53,6 +54,33 @@ body
 .menu-operations .menu-input:focus
 {
     outline: none;
+}
+
+@keyframes menu-input-blink
+{
+    from
+    {
+        background-color: #313131;
+    }
+
+    to
+    {
+        background-color: #de595a;
+    }
+}
+
+.menu-operations .menu-input.warning
+{
+    background-color: #de595a;
+    animation-name: menu-input-blink;
+    animation-duration: .15s;
+    animation-iteration-count: 2;
+}
+
+.menu-operations .menu-input.warning::placeholder
+{
+    color: white;
+    opacity: .6;
 }
 
 /*-- fleet list general --*/

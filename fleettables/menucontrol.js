@@ -86,10 +86,13 @@ class _menucontroller
 
             else
             {
-                console.log(this.buttons[4].value);
+                if (this.buttons[4].value=="")
+                {
+                    this.buttons[4].classList.add("warning");
+                    return;
+                }
 
                 var selected=this.shiptableContainer.querySelectorAll(".selected");
-
                 for (var x=0,l=selected.length;x<l;x++)
                 {
                     console.log(selected[x]);
@@ -153,6 +156,7 @@ class _menucontroller
             this.fleetCreate=1;
             this.buttonsText[1].innerText="cancel create fleet";
             this.shiptableContainer.classList.toggle("select-mode");
+            this.buttons[4].classList.remove("warning");
             this.buttons[4].value="";
             this.toggleButtonHide([4,0,3]);
         }
