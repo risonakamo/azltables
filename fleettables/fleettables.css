@@ -28,9 +28,31 @@ body
     box-sizing: border-box;
 }
 
-.menu-operations .button.hidden
+.menu-operations .menu-item.hidden
 {
     display: none;
+}
+
+.menu-operations .menu-input
+{
+    display: inline-block;
+    vertical-align: top;
+    height: 30px;
+    margin: 3px 0 0 0;
+    padding: 0 8px 0 8px;
+    color: white;
+    background-color: #313131;
+    font-family: roboto;
+    font-size: 17px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 -1px 1px 0 rgba(0, 0, 0, 0.1), 1px 2px 4px 0 rgba(0, 0, 0, 0.07), -1px 2px 4px 0 rgba(0, 0, 0, 0.07);
+    box-sizing: border-box;
+}
+
+.menu-operations .menu-input:focus
+{
+    outline: none;
 }
 
 /*-- fleet list general --*/

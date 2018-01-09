@@ -2,7 +2,7 @@ class _menucontroller
 {
     _menucontroller();
 
-    element-array buttons; //main menu buttons
+    element-array buttons; //main menu buttons and also the textbox
     element-array buttonsText; //text of main menu buttons
     element-array shiptables;
 
@@ -10,8 +10,9 @@ class _menucontroller
 
     int deleteMode;
     int clearMode;
+    int fleetCreate;
 
-    void initButtons();
+    void initMenu();
     void initShipEvents();
     void toggleButtonHide(array hideButtons);
 }

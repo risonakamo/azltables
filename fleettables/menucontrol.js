@@ -2,19 +2,24 @@ class _menucontroller
 {
     constructor()
     {
-        this.buttons=document.querySelectorAll(".menu-operations .button");
+        var doc=document;
+
+        this.buttons=doc.querySelectorAll(".menu-operations .menu-item");
         this.buttonsText=[];
-        this.shiptableContainer=document.querySelector(".ftables");
+
+        this.shiptableContainer=doc.querySelector(".ftables");
+
         this.shiptables=this.shiptableContainer.querySelectorAll(".ship-table");
 
         this.deleteMode=0;
         this.clearMode=0;
+        this.fleetCreate=0;
 
-        this.initButtons();
+        this.initMenu();
         this.initShipEvents();
     }
 
-    initButtons()
+    initMenu()
     {
         //remove ship button
         this.buttonsText.push(this.buttons[0].querySelector("span"));
@@ -47,6 +52,14 @@ class _menucontroller
 
         this.buttonsText.push(this.buttons[1].querySelector("span"));
         this.buttons[1].addEventListener("click",(e)=>{
+            if (this.fleetCreate)
+            {
+                this.fleetCreate=0;
+                this.buttonsText[1].innerText="clear all";
+                this.toggleButtonHide([4,0,3]);
+                return;
+            }
+
             if (!this.clearMode)
             {
                 this.clearMode=1;
@@ -63,6 +76,25 @@ class _menucontroller
                 this.shiptableContainer.innerHTML="";
                 this.toggleButtonHide([2,3]);
                 chrome.storage.local.remove(_shipClasses);
+            }
+        });
+
+        this.buttonsText.push(this.buttons[2].querySelector("span"));
+        this.buttons[2].addEventListener("click",(e)=>{
+            if (!this.fleetCreate)
+            {
+                this.fleetCreate=1;
+                this.buttonsText[1].innerText="cancel create fleet";
+                this.toggleButtonHide([4,0,3]);
+            }
+
+            else
+            {
+
+
+                this.fleetCreate=0;
+                this.buttonsText[1].innerText="clear all";
+                this.toggleButtonHide([4,0,3]);
             }
         });
     }
