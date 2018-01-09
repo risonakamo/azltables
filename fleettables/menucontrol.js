@@ -56,6 +56,7 @@ class _menucontroller
             {
                 this.fleetCreate=0;
                 this.buttonsText[1].innerText="clear all";
+                this.shiptableContainer.classList.toggle("select-mode");
                 this.toggleButtonHide([4,0,3]);
                 return;
             }
@@ -85,6 +86,7 @@ class _menucontroller
             {
                 this.fleetCreate=1;
                 this.buttonsText[1].innerText="cancel create fleet";
+                this.shiptableContainer.classList.toggle("select-mode");
                 this.toggleButtonHide([4,0,3]);
             }
 
@@ -93,6 +95,7 @@ class _menucontroller
 
 
                 this.fleetCreate=0;
+                this.shiptableContainer.classList.toggle("select-mode");
                 this.buttonsText[1].innerText="clear all";
                 this.toggleButtonHide([4,0,3]);
             }
@@ -126,6 +129,11 @@ class _menucontroller
                     });
 
                     this.shiptableContainer.removeChild(e.currentTarget);
+                }
+
+                else if (this.fleetCreate)
+                {
+                    e.currentTarget.classList.toggle("selected");
                 }
             });
         }
