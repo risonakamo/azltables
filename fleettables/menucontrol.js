@@ -54,10 +54,7 @@ class _menucontroller
         this.buttons[1].addEventListener("click",(e)=>{
             if (this.fleetCreate)
             {
-                this.fleetCreate=0;
-                this.buttonsText[1].innerText="clear all";
-                this.shiptableContainer.classList.toggle("select-mode");
-                this.toggleButtonHide([4,0,3]);
+                this.toggleFleetCreate();
                 return;
             }
 
@@ -84,20 +81,21 @@ class _menucontroller
         this.buttons[2].addEventListener("click",(e)=>{
             if (!this.fleetCreate)
             {
-                this.fleetCreate=1;
-                this.buttonsText[1].innerText="cancel create fleet";
-                this.shiptableContainer.classList.toggle("select-mode");
-                this.toggleButtonHide([4,0,3]);
+                this.toggleFleetCreate();
             }
 
             else
             {
+                console.log(this.buttons[4].value);
 
+                var selected=this.shiptableContainer.querySelectorAll(".selected");
 
-                this.fleetCreate=0;
-                this.shiptableContainer.classList.toggle("select-mode");
-                this.buttonsText[1].innerText="clear all";
-                this.toggleButtonHide([4,0,3]);
+                for (var x=0,l=selected.length;x<l;x++)
+                {
+                    console.log(selected[x]);
+                }
+
+                this.toggleFleetCreate();
             }
         });
     }
@@ -133,7 +131,8 @@ class _menucontroller
 
                 else if (this.fleetCreate)
                 {
-                    e.currentTarget.classList.toggle("selected");
+                    var ct=e.currentTarget;
+                    ct.classList.toggle("selected");
                 }
             });
         }
@@ -144,6 +143,34 @@ class _menucontroller
         for (var x=0;x<hideButtons.length;x++)
         {
             this.buttons[hideButtons[x]].classList.toggle("hidden");
+        }
+    }
+
+    toggleFleetCreate()
+    {
+        if (!this.fleetCreate)
+        {
+            this.fleetCreate=1;
+            this.buttonsText[1].innerText="cancel create fleet";
+            this.shiptableContainer.classList.toggle("select-mode");
+            this.buttons[4].value="";
+            this.toggleButtonHide([4,0,3]);
+        }
+
+        else
+        {
+            this.fleetCreate=0;
+            this.shiptableContainer.classList.toggle("select-mode");
+            this.buttonsText[1].innerText="clear all";
+
+            var selected=this.shiptableContainer.querySelectorAll(".selected");
+
+            for (var x=0,l=selected.length;x<l;x++)
+            {
+                selected[x].classList.remove("selected");
+            }
+
+            this.toggleButtonHide([4,0,3]);
         }
     }
 }

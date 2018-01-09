@@ -6,7 +6,7 @@ class _menucontroller
     element-array buttonsText; //text of main menu buttons
     element-array shiptables;
 
-    element shiptableContainer;
+    element shiptableContainer; //actual element containing shiptables
 
     int deleteMode;
     int clearMode;
@@ -15,4 +15,5 @@ class _menucontroller
     void initMenu();
     void initShipEvents();
     void toggleButtonHide(array hideButtons);
+    void toggleFleetCreate();
 }
