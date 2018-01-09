@@ -2,6 +2,7 @@ window.onload=main;
 
 var menucontroller;
 var _shipClasses;
+var _ships=[];
 
 function main()
 {
@@ -9,6 +10,7 @@ function main()
     _shipClasses=["DD","CL","CA","BB","BM","CV","CVL","AR"];
     chrome.storage.local.get(_shipClasses,(data)=>{
         var currentClassShips;
+        var currentShip;
         for (var x=0;x<_shipClasses.length;x++)
         {
             currentClassShips=data[_shipClasses[x]];
@@ -20,7 +22,11 @@ function main()
 
             for (var y=0;y<currentClassShips.length;y++)
             {
-                ftables.insertAdjacentHTML("beforeend",genShipTable(currentClassShips[y]));
+                // ftables.insertAdjacentHTML("beforeend",genShipTable(currentClassShips[y]));
+
+                currentShip=genShipTableElement(currentClassShips[y]);
+                _ships.push(currentShip);
+                ftables.appendChild(currentShip);
             }
         }
 

@@ -109,9 +109,9 @@ class _menucontroller
             this.shiptables[x].addEventListener("click",(e)=>{
                 if (this.deleteMode)
                 {
-                    var name=e.currentTarget.children[0].children[1].innerText;
+                    var name=e.currentTarget.name;
+                    var deleteClass=e.currentTarget.class;
 
-                    var deleteClass=e.currentTarget.querySelector(".class-box .label").innerText;
                     chrome.storage.local.get(deleteClass,(d)=>{
                         var data=d[deleteClass];
 
