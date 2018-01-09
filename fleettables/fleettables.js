@@ -27,3 +27,10 @@ function main()
         menucontroller=new _menucontroller;
     });
 }
+
+function showDatabase()
+{
+    chrome.storage.local.get(null,(d)=>{
+        console.log(d);
+    });
+}

@@ -8,8 +8,9 @@ type localStorage
     CV:[ship],
     CVL:[ship],
     AR:[ship],
+    #and any other ship classes that might be added later
 
-    fleets:[[string]] #custom lists creatable by user, where string is a ship's name
+    fleets:[fleet] #custom lists creatable by user, where string is a ship's name
 }
 
 type ship
@@ -50,4 +51,11 @@ type ship
         torpedo: char
     },
     equipment:[int] #must be size 3
+}
+
+type fleet
+{
+    name: string,
+    ships:[string],
+    classes:[string]
 }
