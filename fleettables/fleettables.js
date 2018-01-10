@@ -55,3 +55,28 @@ function showDatabase()
         console.log(d);
     });
 }
+
+//give array of ship names to filter to those ships only
+//give it empty array or 0 to show all again
+function filterShips(ships)
+{
+    if (!ships || !ships.length)
+    {
+        for (var x=0,l=_ships.length;x<l;x++)
+        {
+            _ships[x].classList.remove("hidden");
+        }
+
+        return;
+    }
+
+    ships=new Set(ships);
+
+    for (var x=0,l=_ships.length;x<l;x++)
+    {
+        if (!ships.has(_ships[x].name))
+        {
+            _ships[x].classList.add("hidden");
+        }
+    }
+}

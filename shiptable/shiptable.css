@@ -30,6 +30,11 @@ a
     vertical-align: top;
 }
 
+.ship-table.hidden
+{
+    display: none;
+}
+
 /*-- general element --*/
 .title-bar
 {
