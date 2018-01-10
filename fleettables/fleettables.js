@@ -3,6 +3,7 @@ window.onload=main;
 var menucontroller;
 var _shipClasses;
 var _ships=[];
+var _fleets;
 
 function main()
 {
@@ -31,6 +32,18 @@ function main()
         }
 
         menucontroller=new _menucontroller;
+    });
+
+    chrome.storage.local.get("fleets",(data)=>{
+        if (data.fleets)
+        {
+            _fleets=data.fleets;
+        }
+
+        else
+        {
+            _fleets=[];
+        }
     });
 }
 

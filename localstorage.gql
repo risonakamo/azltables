@@ -57,5 +57,19 @@ type fleet
 {
     name: string,
     ships:[string],
-    classes:[string]
+    classes: classcount
+}
+
+#object counting how many of each class there is
+type classcount
+{
+    dd: int,
+    cl: int,
+    #and all the other classes that may or may not exist
+}
+
+type shipElement
+{
+    name:string,
+    class:string
 }

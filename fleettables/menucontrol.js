@@ -19,6 +19,7 @@ class _menucontroller
         this.initShipEvents();
     }
 
+    //events of menu
     initMenu()
     {
         //remove ship button
@@ -50,6 +51,7 @@ class _menucontroller
             }
         });
 
+        //clear all button
         this.buttonsText.push(this.buttons[1].querySelector("span"));
         this.buttons[1].addEventListener("click",(e)=>{
             if (this.fleetCreate)
@@ -77,6 +79,7 @@ class _menucontroller
             }
         });
 
+        //fleet create button
         this.buttonsText.push(this.buttons[2].querySelector("span"));
         this.buttons[2].addEventListener("click",(e)=>{
             if (!this.fleetCreate)
@@ -92,17 +95,14 @@ class _menucontroller
                     return;
                 }
 
-                var selected=this.shiptableContainer.querySelectorAll(".selected");
-                for (var x=0,l=selected.length;x<l;x++)
-                {
-                    console.log(selected[x]);
-                }
+                this.addFleet();
 
                 this.toggleFleetCreate();
             }
         });
     }
 
+    //shipbox events
     initShipEvents()
     {
         for (var x=0,l=this.shiptables.length;x<l;x++)
@@ -141,6 +141,7 @@ class _menucontroller
         }
     }
 
+    //give it array of buttons indexes to toggle hidden state on
     toggleButtonHide(hideButtons)
     {
         for (var x=0;x<hideButtons.length;x++)
@@ -149,6 +150,7 @@ class _menucontroller
         }
     }
 
+    //toggle fleet create mode
     toggleFleetCreate()
     {
         if (!this.fleetCreate)
@@ -176,5 +178,30 @@ class _menucontroller
 
             this.toggleButtonHide([4,0,3]);
         }
+    }
+
+    //using hopefully set data, create a fleet and add it to database, and local
+    //copy of fleets _fleets
+    addFleet()
+    {
+        var selected=this.shiptableContainer.querySelectorAll(".selected");
+        var res={ships:[],classes:{},name:this.buttons[4].value};
+
+        for (var x=0;x<selected.length;x++)
+        {
+            res.ships.push(selected[x].name);
+            if (res.classes[selected[x].class])
+            {
+                res.classes[selected[x].class]++;
+            }
+
+            else
+            {
+                res.classes[selected[x].class]=1;
+            }
+        }
+
+        _fleets.push(res);
+        chrome.storage.local.set({fleets:_fleets});
     }
 }
