@@ -13,6 +13,8 @@ class _menucontroller
 
         this.fleetList=doc.querySelector(".fleet-list");
 
+        this.currentFleet={};
+
         this.deleteMode=0;
         this.clearMode=0;
         this.fleetCreate=0;
@@ -65,7 +67,20 @@ class _menucontroller
         this.buttons[1].addEventListener("click",(e)=>{
             if (this.fleetLoad)
             {
+                this.fleetList.removeChild(this.currentFleet.fleetElement);
 
+                for (var x=0,l=_fleets.length;x<l;x++)
+                {
+                    if (_fleets[x].id==this.currentFleet.id)
+                    {
+                        _fleets.splice(x,1);
+                        break;
+                    }
+                }
+
+                chrome.storage.local.set({fleets:_fleets});
+
+                this.toggleLoadedFleetMode(0);
                 return;
             }
 
@@ -261,15 +276,20 @@ class _menucontroller
         res.innerHTML=`<div class="inline-contain"><div class="overflow-contain">${shipsString}</div><span class="label">${data.name}</span></div>`;
 
         res.addEventListener("click",(e)=>{
-            this.toggleLoadedFleetMode(data.ships);
+            this.currentFleet.id=data.id;
+            this.currentFleet.fleetElement=e.currentTarget;
 
+            this.toggleLoadedFleetMode(data.ships);
         });
 
         return res;
     }
 
+    //give it an array of ships to enter fleet loaded mode, or 0 to exit.
+    //if already in another mode, it will filter only
     toggleLoadedFleetMode(data)
     {
+        //exit fleet loaded mode
         if (!(data instanceof Array))
         {
             this.fleetLoad=0;
@@ -289,6 +309,7 @@ class _menucontroller
             return;
         }
 
+        //enter fleetloaded mode
         this.fleetLoad=1;
         filterShips(data);
 
