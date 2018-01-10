@@ -112,6 +112,12 @@ class _menucontroller
         //fleet create button
         this.buttonsText.push(this.buttons[2].querySelector("span"));
         this.buttons[2].addEventListener("click",(e)=>{
+            if (this.fleetLoad)
+            {
+
+                return;
+            }
+
             if (!this.fleetCreate)
             {
                 this.toggleFleetCreate();
@@ -278,6 +284,7 @@ class _menucontroller
         res.addEventListener("click",(e)=>{
             this.currentFleet.id=data.id;
             this.currentFleet.fleetElement=e.currentTarget;
+            this.buttons[4].value=data.name;
 
             this.toggleLoadedFleetMode(data.ships);
         });
@@ -298,7 +305,7 @@ class _menucontroller
             this.buttonsText[0].innerText="remove ship";
             this.buttonsText[1].innerText="clear all";
             this.buttonsText[2].innerText="create fleet";
-            this.toggleButtonHide([3]);
+            this.toggleButtonHide([3,4]);
             return;
         }
 
@@ -316,6 +323,6 @@ class _menucontroller
         this.buttonsText[0].innerText="return";
         this.buttonsText[1].innerText="delete current fleet";
         this.buttonsText[2].innerText="edit fleet members";
-        this.toggleButtonHide([3]);
+        this.toggleButtonHide([3,4]);
     }
 }
