@@ -10,7 +10,8 @@ type localStorage
     AR:[ship],
     #and any other ship classes that might be added later
 
-    fleets:[fleet] #custom lists creatable by user, where string is a ship's name
+    fleets:[fleet], #custom lists creatable by user, where string is a ship's name
+    fleetsId: int
 }
 
 type ship
@@ -56,6 +57,7 @@ type ship
 type fleet
 {
     name: string,
+    id:int,
     ships:[string],
     classes: classcount
 }

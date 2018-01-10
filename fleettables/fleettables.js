@@ -3,7 +3,8 @@ window.onload=main;
 var menucontroller;
 var _shipClasses;
 var _ships=[];
-var _fleets;
+var _fleets=[];
+var _fleetsId=0;
 
 function main()
 {
@@ -34,15 +35,15 @@ function main()
         menucontroller=new _menucontroller;
     });
 
-    chrome.storage.local.get("fleets",(data)=>{
+    chrome.storage.local.get(["fleets","fleetsId"],(data)=>{
         if (data.fleets)
         {
             _fleets=data.fleets;
         }
 
-        else
+        if (data.fleetsId)
         {
-            _fleets=[];
+            _fleetsId=data.fleetsId;
         }
 
         menucontroller.initFleetMenu();
@@ -77,6 +78,11 @@ function filterShips(ships)
         if (!ships.has(_ships[x].name))
         {
             _ships[x].classList.add("hidden");
+        }
+
+        else
+        {
+            _ships[x].classList.remove("hidden");
         }
     }
 }

@@ -16,6 +16,7 @@ class _menucontroller
         this.deleteMode=0;
         this.clearMode=0;
         this.fleetCreate=0;
+        this.fleetLoad=0;
 
         this.initMenu();
         this.initShipEvents();
@@ -27,12 +28,18 @@ class _menucontroller
         //remove ship button
         this.buttonsText.push(this.buttons[0].querySelector("span"));
         this.buttons[0].addEventListener("click",(e)=>{
+            if (this.fleetLoad)
+            {
+                this.toggleLoadedFleetMode(0);
+                return;
+            }
+
             if (this.clearMode)
             {
                 this.clearMode=0;
                 this.buttonsText[0].innerText="remove ship";
                 this.buttonsText[1].innerText="clear all";
-                this.toggleButtonHide([2,3]);
+                this.toggleButtonHide([2]);
                 return;
             }
 
@@ -41,7 +48,7 @@ class _menucontroller
                 this.deleteMode=1;
                 this.shiptableContainer.classList.add("delete-mode");
                 this.buttonsText[0].innerText="end remove";
-                this.toggleButtonHide([1,2,3]);
+                this.toggleButtonHide([1,2]);
             }
 
             else
@@ -49,13 +56,19 @@ class _menucontroller
                 this.deleteMode=0;
                 this.shiptableContainer.classList.remove("delete-mode");
                 this.buttonsText[0].innerText="remove ship";
-                this.toggleButtonHide([1,2,3]);
+                this.toggleButtonHide([1,2]);
             }
         });
 
         //clear all button
         this.buttonsText.push(this.buttons[1].querySelector("span"));
         this.buttons[1].addEventListener("click",(e)=>{
+            if (this.fleetLoad)
+            {
+
+                return;
+            }
+
             if (this.fleetCreate)
             {
                 this.toggleFleetCreate();
@@ -67,7 +80,7 @@ class _menucontroller
                 this.clearMode=1;
                 this.buttonsText[0].innerText="cancel clear";
                 this.buttonsText[1].innerText="confirm clear all!!!!!!!!!";
-                this.toggleButtonHide([2,3]);
+                this.toggleButtonHide([2]);
             }
 
             else
@@ -76,7 +89,7 @@ class _menucontroller
                 this.buttonsText[0].innerText="remove ship";
                 this.buttonsText[1].innerText="clear all";
                 this.shiptableContainer.innerHTML="";
-                this.toggleButtonHide([2,3]);
+                this.toggleButtonHide([2]);
                 chrome.storage.local.remove(_shipClasses);
             }
         });
@@ -101,6 +114,11 @@ class _menucontroller
 
                 this.toggleFleetCreate();
             }
+        });
+
+        this.buttonsText.push(this.buttons[3].querySelector("span"));
+        this.buttons[3].addEventListener("click",(e)=>{
+
         });
     }
 
@@ -148,7 +166,7 @@ class _menucontroller
     {
         for (var x=0,l=_fleets.length;x<l;x++)
         {
-            this.fleetList.insertAdjacentHTML("beforeend",this.genFleetEntry(_fleets[x]));
+            this.fleetList.appendChild(this.genFleetEntry(_fleets[x]));
         }
     }
 
@@ -171,7 +189,7 @@ class _menucontroller
             this.shiptableContainer.classList.toggle("select-mode");
             this.buttons[4].classList.remove("warning");
             this.buttons[4].value="";
-            this.toggleButtonHide([4,0,3]);
+            this.toggleButtonHide([4,0]);
         }
 
         else
@@ -187,7 +205,7 @@ class _menucontroller
                 selected[x].classList.remove("selected");
             }
 
-            this.toggleButtonHide([4,0,3]);
+            this.toggleButtonHide([4,0]);
         }
     }
 
@@ -196,7 +214,14 @@ class _menucontroller
     addFleet()
     {
         var selected=this.shiptableContainer.querySelectorAll(".selected");
-        var res={ships:[],classes:{},name:this.buttons[4].value};
+        var res={
+            ships:[],
+            classes:{},
+            name:this.buttons[4].value,
+            id:_fleetsId+1
+        };
+
+        _fleetsId++;
 
         for (var x=0;x<selected.length;x++)
         {
@@ -215,11 +240,14 @@ class _menucontroller
         _fleets.push(res);
         chrome.storage.local.set({fleets:_fleets});
 
-        this.fleetList.insertAdjacentHTML("beforeend",this.genFleetEntry(res));
+        this.fleetList.appendChild(this.genFleetEntry(res));
     }
 
     genFleetEntry(data)
     {
+        var res=document.createElement("div");
+        res.classList.add("fleet-entry");
+
         var shipsString="";
 
         for (var x in data.classes)
@@ -230,6 +258,43 @@ class _menucontroller
             }
         }
 
-        return `<div class="fleet-entry"><div class="inline-contain"><div class="overflow-contain">${shipsString}</div><span class="label">${data.name}</span></div></div>`;
+        res.innerHTML=`<div class="inline-contain"><div class="overflow-contain">${shipsString}</div><span class="label">${data.name}</span></div>`;
+
+        res.addEventListener("click",(e)=>{
+            this.toggleLoadedFleetMode(data.ships);
+
+        });
+
+        return res;
+    }
+
+    toggleLoadedFleetMode(data)
+    {
+        if (!(data instanceof Array))
+        {
+            this.fleetLoad=0;
+            filterShips([]);
+
+            this.buttonsText[0].innerText="remove ship";
+            this.buttonsText[1].innerText="clear all";
+            this.buttonsText[2].innerText="create fleet";
+            this.toggleButtonHide([3]);
+            return;
+        }
+
+        //if any of the other modes are active, fleets simply act as a filter
+        if (this.deleteMode || this.clearMode || this.fleetCreate || this.fleetLoad)
+        {
+            filterShips(data);
+            return;
+        }
+
+        this.fleetLoad=1;
+        filterShips(data);
+
+        this.buttonsText[0].innerText="return";
+        this.buttonsText[1].innerText="delete current fleet";
+        this.buttonsText[2].innerText="edit fleet members";
+        this.toggleButtonHide([3]);
     }
 }

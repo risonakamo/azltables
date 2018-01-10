@@ -12,6 +12,7 @@ class _menucontroller
     int deleteMode;
     int clearMode;
     int fleetCreate;
+    int fleetLoad;
 
     void initMenu();
     void initShipEvents();
@@ -19,6 +20,7 @@ class _menucontroller
 
     void toggleButtonHide(array hideButtons);
     void toggleFleetCreate();
+    void toggleLoadedFleetMode(object data);
 
     void addFleet();
 
