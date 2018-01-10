@@ -115,6 +115,9 @@ body
 .inline-contain .overflow-contain
 {
     display: inline-block;
+    height: 31px;
+    min-width: 31px;
+    background-color: #313131;
     border-radius: 4px;
     overflow: hidden;
 }
@@ -134,6 +137,7 @@ body
     border-radius: 4px;
     opacity: 0;
     transition: visibility 0s .15s,opacity .15s;
+    white-space: nowrap;
 }
 
 .fleet-entry .inline-contain:hover .label

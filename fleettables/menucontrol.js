@@ -11,6 +11,8 @@ class _menucontroller
 
         this.shiptables=this.shiptableContainer.querySelectorAll(".ship-table");
 
+        this.fleetList=doc.querySelector(".fleet-list");
+
         this.deleteMode=0;
         this.clearMode=0;
         this.fleetCreate=0;
@@ -141,6 +143,15 @@ class _menucontroller
         }
     }
 
+    //initialise fleets. called by some outside function when fleets are ready
+    initFleetMenu()
+    {
+        for (var x=0,l=_fleets.length;x<l;x++)
+        {
+            this.fleetList.insertAdjacentHTML("beforeend",this.genFleetEntry(_fleets[x]));
+        }
+    }
+
     //give it array of buttons indexes to toggle hidden state on
     toggleButtonHide(hideButtons)
     {
@@ -203,5 +214,22 @@ class _menucontroller
 
         _fleets.push(res);
         chrome.storage.local.set({fleets:_fleets});
+
+        this.fleetList.insertAdjacentHTML("beforeend",this.genFleetEntry(res));
+    }
+
+    genFleetEntry(data)
+    {
+        var shipsString="";
+
+        for (var x in data.classes)
+        {
+            for (var y=0;y<data.classes[x];y++)
+            {
+                shipsString+=`<img class="${x}" src="/shiptable/class/${x}.png">`;
+            }
+        }
+
+        return `<div class="fleet-entry"><div class="inline-contain"><div class="overflow-contain">${shipsString}</div><span class="label">${data.name}</span></div></div>`;
     }
 }

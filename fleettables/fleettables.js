@@ -44,6 +44,8 @@ function main()
         {
             _fleets=[];
         }
+
+        menucontroller.initFleetMenu();
     });
 }
 

@@ -4,6 +4,7 @@ class _menucontroller
 
     element-array buttons; //main menu buttons and also the textbox
     element-array buttonsText; //text of main menu buttons
+    element fleetList;
 
     element shiptableContainer; //actual element containing shiptables
     element-array shiptables; //array of all shiptables
@@ -14,9 +15,12 @@ class _menucontroller
 
     void initMenu();
     void initShipEvents();
+    void initFleetMenu();
 
     void toggleButtonHide(array hideButtons);
     void toggleFleetCreate();
 
     void addFleet();
+
+    string genFleetEntry(object data);
 }
