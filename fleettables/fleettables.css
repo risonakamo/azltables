@@ -115,8 +115,9 @@ body
 .inline-contain .overflow-contain
 {
     display: inline-block;
-    height: 31px;
+    min-height: 31px;
     min-width: 31px;
+    max-width: 186px;
     background-color: #313131;
     border-radius: 4px;
     overflow: hidden;

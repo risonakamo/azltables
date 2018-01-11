@@ -280,10 +280,10 @@ class _menucontroller
 
         res.innerHTML=`<div class="inline-contain"><div class="overflow-contain">${shipsString}</div><span class="label">${data.name}</span></div>`;
 
-        res.addEventListener("click",(e)=>{
+        res.firstChild.firstChild.addEventListener("click",(e)=>{
             if (!(this.deleteMode || this.clearMode || this.fleetCreate || this.fleetEdit))
             {
-                this.currentFleet.fleetElement=e.currentTarget;
+                this.currentFleet.fleetElement=res;
                 this.currentFleet.fleetObj=data;
                 this.buttons[4].value=data.name;
             }
