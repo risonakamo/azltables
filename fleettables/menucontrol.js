@@ -19,6 +19,7 @@ class _menucontroller
         this.clearMode=0;
         this.fleetCreate=0;
         this.fleetLoad=0;
+        this.fleetEdit=0;
 
         this.initMenu();
         this.initShipEvents();
@@ -30,6 +31,12 @@ class _menucontroller
         //remove ship button
         this.buttonsText.push(this.buttons[0].querySelector("span"));
         this.buttons[0].addEventListener("click",(e)=>{
+            if (this.fleetEdit)
+            {
+                this.toggleFleetEdit();
+                return;
+            }
+
             if (this.fleetLoad)
             {
                 this.toggleLoadedFleetMode(0);
@@ -71,7 +78,7 @@ class _menucontroller
 
                 for (var x=0,l=_fleets.length;x<l;x++)
                 {
-                    if (_fleets[x].id==this.currentFleet.id)
+                    if (_fleets[x].id==this.currentFleet.fleetObj.id)
                     {
                         _fleets.splice(x,1);
                         break;
@@ -114,7 +121,7 @@ class _menucontroller
         this.buttons[2].addEventListener("click",(e)=>{
             if (this.fleetLoad)
             {
-
+                this.toggleFleetEdit();
                 return;
             }
 
@@ -173,7 +180,7 @@ class _menucontroller
                     this.shiptableContainer.removeChild(e.currentTarget);
                 }
 
-                else if (this.fleetCreate)
+                else if (this.fleetCreate || this.fleetEdit)
                 {
                     var ct=e.currentTarget;
                     ct.classList.toggle("selected");
@@ -282,8 +289,8 @@ class _menucontroller
         res.innerHTML=`<div class="inline-contain"><div class="overflow-contain">${shipsString}</div><span class="label">${data.name}</span></div>`;
 
         res.addEventListener("click",(e)=>{
-            this.currentFleet.id=data.id;
             this.currentFleet.fleetElement=e.currentTarget;
+            this.currentFleet.fleetObj=data;
             this.buttons[4].value=data.name;
 
             this.toggleLoadedFleetMode(data.ships);
@@ -324,5 +331,63 @@ class _menucontroller
         this.buttonsText[1].innerText="delete current fleet";
         this.buttonsText[2].innerText="edit fleet members";
         this.toggleButtonHide([3,4]);
+    }
+
+    toggleFleetEdit()
+    {
+        if (!this.fleetEdit)
+        {
+            this.fleetEdit=1;
+            this.toggleButtonHide([1,2,3,4]);
+            this.shiptableContainer.classList.add("select-mode");
+
+            var selected=new Set(this.currentFleet.fleetObj.ships);
+
+            for (var x=0,l=this.shiptables.length;x<l;x++)
+            {
+                this.shiptables[x].classList.remove("hidden");
+
+                if (selected.has(this.shiptables[x].name))
+                {
+                    this.shiptables[x].classList.add("selected");
+                }
+
+                else
+                {
+                    this.shiptables[x].classList.remove("selected");
+                }
+            }
+        }
+
+        else
+        {
+            this.fleetEdit=0;
+            this.toggleButtonHide([1,2,3,4]);
+            this.shiptableContainer.classList.remove("select-mode");
+
+            var selected=[];
+            var classes={};
+            for (var x=0,l=this.shiptables.length;x<l;x++)
+            {
+                if (this.shiptables[x].classList.contains("selected"))
+                {
+                    selected.push(this.shiptables[x].name);
+
+                    if (classes[this.shiptables[x].class])
+                    {
+                        classes[this.shiptables[x].class]++;
+                    }
+
+                    else
+                    {
+                        classes[this.shiptables[x].class]=1;
+                    }
+                }
+            }
+
+            this.currentFleet.fleetObj.ships=selected;
+            this.currentFleet.fleetObj.classes=classes;
+            chrome.storage.local.set({fleets:_fleets});
+        }
     }
 }

@@ -9,10 +9,17 @@ class _menucontroller
     element shiptableContainer; //actual element containing shiptables
     element-array shiptables; //array of all shiptables
 
+    object currentFleet
+    {
+        element fleetElement;
+        object fleetObj;
+    };
+
     int deleteMode;
     int clearMode;
     int fleetCreate;
     int fleetLoad;
+    int fleetEdit;
 
     void initMenu();
     void initShipEvents();
@@ -21,8 +28,9 @@ class _menucontroller
     void toggleButtonHide(array hideButtons);
     void toggleFleetCreate();
     void toggleLoadedFleetMode(object data);
+    void toggleFleetEdit();
 
     void addFleet();
 
-    string genFleetEntry(object data);
+    element genFleetEntry(object data);
 }
