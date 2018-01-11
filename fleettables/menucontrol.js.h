@@ -33,4 +33,5 @@ class _menucontroller
     void addFleet();
 
     element genFleetEntry(object data);
+    string genShipString(object classes);
 }

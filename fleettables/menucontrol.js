@@ -276,27 +276,37 @@ class _menucontroller
         var res=document.createElement("div");
         res.classList.add("fleet-entry");
 
-        var shipsString="";
-
-        for (var x in data.classes)
-        {
-            for (var y=0;y<data.classes[x];y++)
-            {
-                shipsString+=`<img class="${x}" src="/shiptable/class/${x}.png">`;
-            }
-        }
+        var shipsString=this.genShipString(data.classes);
 
         res.innerHTML=`<div class="inline-contain"><div class="overflow-contain">${shipsString}</div><span class="label">${data.name}</span></div>`;
 
         res.addEventListener("click",(e)=>{
-            this.currentFleet.fleetElement=e.currentTarget;
-            this.currentFleet.fleetObj=data;
-            this.buttons[4].value=data.name;
+            if (!(this.deleteMode || this.clearMode || this.fleetCreate || this.fleetEdit))
+            {
+                this.currentFleet.fleetElement=e.currentTarget;
+                this.currentFleet.fleetObj=data;
+                this.buttons[4].value=data.name;
+            }
 
             this.toggleLoadedFleetMode(data.ships);
         });
 
         return res;
+    }
+
+    //give it classes object with count of classes
+    genShipString(classes)
+    {
+        var shipsString="";
+        for (var x in classes)
+        {
+            for (var y=0;y<classes[x];y++)
+            {
+                shipsString+=`<img class="${x}" src="/shiptable/class/${x}.png">`;
+            }
+        }
+
+        return shipsString;
     }
 
     //give it an array of ships to enter fleet loaded mode, or 0 to exit.
@@ -317,7 +327,7 @@ class _menucontroller
         }
 
         //if any of the other modes are active, fleets simply act as a filter
-        if (this.deleteMode || this.clearMode || this.fleetCreate || this.fleetLoad)
+        if (this.deleteMode || this.clearMode || this.fleetCreate || this.fleetLoad || this.fleetEdit)
         {
             filterShips(data);
             return;
@@ -371,6 +381,7 @@ class _menucontroller
             {
                 if (this.shiptables[x].classList.contains("selected"))
                 {
+                    this.shiptables[x].classList.remove("hidden");
                     selected.push(this.shiptables[x].name);
 
                     if (classes[this.shiptables[x].class])
@@ -383,10 +394,18 @@ class _menucontroller
                         classes[this.shiptables[x].class]=1;
                     }
                 }
+
+                else
+                {
+                    this.shiptables[x].classList.add("hidden");
+                }
             }
 
             this.currentFleet.fleetObj.ships=selected;
             this.currentFleet.fleetObj.classes=classes;
+
+            this.currentFleet.fleetElement.firstChild.firstChild.innerHTML=this.genShipString(classes);
+
             chrome.storage.local.set({fleets:_fleets});
         }
     }
