@@ -41,7 +41,8 @@ body
 }
 
 /*-- menu hover --*/
-.trigger-zone:hover .menu-operations,.trigger-zone:hover .fleet-list
+.trigger-zone:hover .menu-operations,.trigger-zone:hover .fleet-list,
+.trigger-zone.show .menu-operations,.trigger-zone.show .fleet-list
 {
     visibility: visible;
 }

@@ -3,15 +3,16 @@ class _menucontroller
     constructor()
     {
         var doc=document;
+        this.triggerZone=doc.querySelector(".trigger-zone");
 
-        this.buttons=doc.querySelectorAll(".menu-operations .menu-item");
+        this.buttons=this.triggerZone.querySelectorAll(".menu-operations .menu-item");
         this.buttonsText=[];
 
         this.shiptableContainer=doc.querySelector(".ftables");
 
         this.shiptables=this.shiptableContainer.querySelectorAll(".ship-table");
 
-        this.fleetList=doc.querySelector(".fleet-list");
+        this.fleetList=this.triggerZone.querySelector(".fleet-list");
 
         this.currentFleet={};
 
@@ -49,6 +50,7 @@ class _menucontroller
                 this.buttonsText[0].innerText="remove ship";
                 this.buttonsText[1].innerText="clear all";
                 this.toggleButtonHide([2]);
+                this.triggerZone.classList.toggle("show");
                 return;
             }
 
@@ -58,6 +60,7 @@ class _menucontroller
                 this.shiptableContainer.classList.add("delete-mode");
                 this.buttonsText[0].innerText="end remove";
                 this.toggleButtonHide([1,2]);
+                this.triggerZone.classList.toggle("show");
             }
 
             else
@@ -66,6 +69,7 @@ class _menucontroller
                 this.shiptableContainer.classList.remove("delete-mode");
                 this.buttonsText[0].innerText="remove ship";
                 this.toggleButtonHide([1,2]);
+                this.triggerZone.classList.toggle("show");
             }
         });
 
@@ -103,6 +107,7 @@ class _menucontroller
                 this.buttonsText[0].innerText="cancel clear";
                 this.buttonsText[1].innerText="confirm clear all!!!!!!!!!";
                 this.toggleButtonHide([2]);
+                this.triggerZone.classList.toggle("show");
             }
 
             else
@@ -112,6 +117,7 @@ class _menucontroller
                 this.buttonsText[1].innerText="clear all";
                 this.shiptableContainer.innerHTML="";
                 this.toggleButtonHide([2]);
+                this.triggerZone.classList.toggle("show");
                 chrome.storage.local.remove(_shipClasses);
             }
         });
@@ -218,6 +224,7 @@ class _menucontroller
             this.buttons[4].classList.remove("warning");
             this.buttons[4].value="";
             this.toggleButtonHide([4,0]);
+            this.triggerZone.classList.toggle("show");
         }
 
         else
@@ -234,6 +241,7 @@ class _menucontroller
             }
 
             this.toggleButtonHide([4,0]);
+            this.triggerZone.classList.toggle("show");
         }
     }
 
@@ -323,6 +331,7 @@ class _menucontroller
             this.buttonsText[1].innerText="clear all";
             this.buttonsText[2].innerText="create fleet";
             this.toggleButtonHide([3,4]);
+            this.triggerZone.classList.toggle("show");
             return;
         }
 
@@ -341,6 +350,7 @@ class _menucontroller
         this.buttonsText[1].innerText="delete current fleet";
         this.buttonsText[2].innerText="edit fleet members";
         this.toggleButtonHide([3,4]);
+        this.triggerZone.classList.toggle("show");
     }
 
     toggleFleetEdit()

@@ -9,6 +9,8 @@ class _menucontroller
     element shiptableContainer; //actual element containing shiptables
     element-array shiptables; //array of all shiptables
 
+    element triggerZone;
+
     object currentFleet
     {
         element fleetElement;
