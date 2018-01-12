@@ -34,7 +34,8 @@ body
     margin-bottom: 9px;
     box-sizing: border-box;
     opacity: 0;
-    transition: opacity .15s,visibility 0s .15s;
+    transform: translate(0,10px);
+    transition: opacity .15s,transform .15s,visibility 0s .15s;
 }
 
 .menu-operations .menu-item.hidden
@@ -48,7 +49,8 @@ body
 {
     visibility: visible;
     opacity: 1;
-    transition: opacity .15s 50ms;
+    transform: translate(0,0);
+    transition: opacity .15s 50ms,transform .15s 50ms;
 }
 
 /*-- menu text input bar --*/
@@ -113,7 +115,8 @@ body
     overflow: auto;
     padding-right: 24px;
     opacity: 0;
-    transition: opacity .15s,visibility 0s .15s;
+    transform: translate(10px,0);
+    transition: opacity .15s,transform .15s,visibility 0s .15s;
     /* background-color: rgba(255,255,255,.5); */
     /* backdrop-filter: blur(5px); */
 }
