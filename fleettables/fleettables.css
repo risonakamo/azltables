@@ -16,21 +16,34 @@ body
     right: 25px;
 }
 
-.menu-operations
+.trigger-zone
 {
     position: fixed;
+    text-align: right;
+    bottom: 0;
+    right: 0;
+}
+
+.menu-operations
+{
+    visibility: hidden;
     height: 56px;
     line-height: 56px;
     text-align: right;
-    bottom: 25px;
-    right: 35px;
-    padding-top: 11px;
+    padding: 9px 34px 0 34px;
+    margin-bottom: 9px;
     box-sizing: border-box;
 }
 
 .menu-operations .menu-item.hidden
 {
     display: none;
+}
+
+/*-- menu hover --*/
+.trigger-zone:hover .menu-operations,.trigger-zone:hover .fleet-list
+{
+    visibility: visible;
 }
 
 /*-- menu text input bar --*/
@@ -86,14 +99,14 @@ body
 /*-- fleet list general --*/
 .fleet-list
 {
-    position: fixed;
-    width: 300px;
+    visibility: hidden;
+    display: inline-block;
+    width: 350px;
     max-height: 350px;
-    bottom: 81px;
-    right: 25px;
     font-size: 0;
     box-sizing: border-box;
     overflow: auto;
+    padding-right: 24px;
     /* background-color: rgba(255,255,255,.5); */
     /* backdrop-filter: blur(5px); */
 }
