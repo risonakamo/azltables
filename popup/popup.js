@@ -17,6 +17,7 @@ function main()
                 }
 
                 document.querySelector(".current-ship").innerHTML=genShipTable(_currentShip);
+                document.querySelector(".buttons").classList.remove("hidden");
             });
         }
     });
