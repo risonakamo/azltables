@@ -150,9 +150,19 @@ class _menucontroller
             }
         });
 
+        //fleet rename button
         this.buttonsText.push(this.buttons[3].querySelector("span"));
         this.buttons[3].addEventListener("click",(e)=>{
+            this.currentFleet.fleetObj.name=this.buttons[4].value;
+            this.currentFleet.fleetElement.firstChild.lastChild.innerText=this.buttons[4].value;
 
+            this.buttons[3].classList.add("complete");
+
+            chrome.storage.local.set({fleets:_fleets});
+
+            setTimeout(()=>{
+                this.buttons[3].classList.remove("complete");
+            },2000);
         });
     }
 
