@@ -5,6 +5,7 @@ im not sure if you can really call these tables though
 ### details
 - chrome extension
 - steals info from https://azurlane.koumakan.jp/ wiki and presents it in a ok cool manner to "help" build teams (maybe not)
+- install as unpacked extension, make sure developer mode is on in chrome extensions
 
 ### usage
 - information can be saved from a valid azurlane wiki ship's page
