@@ -164,6 +164,15 @@ class _menucontroller
                 this.buttons[3].classList.remove("complete");
             },2000);
         });
+
+        this.triggerZone.querySelector(".all-filter").addEventListener("click",(e)=>{
+            if (this.fleetLoad && !this.fleetEdit)
+            {
+                this.toggleLoadedFleetMode(0);
+            }
+
+            filterShips(0);
+        });
     }
 
     //shipbox events
@@ -210,7 +219,7 @@ class _menucontroller
     {
         for (var x=0,l=_fleets.length;x<l;x++)
         {
-            this.fleetList.appendChild(this.genFleetEntry(_fleets[x]));
+            this.fleetList.insertAdjacentElement("afterbegin",this.genFleetEntry(_fleets[x]));
         }
     }
 
@@ -286,7 +295,7 @@ class _menucontroller
         _fleets.push(res);
         chrome.storage.local.set({fleets:_fleets});
 
-        this.fleetList.appendChild(this.genFleetEntry(res));
+        this.fleetList.insertAdjacentElement("afterbegin",this.genFleetEntry(res));
     }
 
     genFleetEntry(data)

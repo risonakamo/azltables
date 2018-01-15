@@ -241,3 +241,13 @@ body
 {
     box-shadow: 0 0 0 4px #313131;
 }
+
+/*-- all fleet --*/
+.fleet-entry .overflow-contain.all-filter
+{
+    font-size: 13px;
+    color: white;
+    text-align: center;
+    padding-top: 6px;
+    box-sizing: border-box;
+}
