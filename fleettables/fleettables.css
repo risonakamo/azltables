@@ -217,6 +217,11 @@ body
     background-color: #ab3d47;
 }
 
+.fleet-list .fleet-entry img.BC
+{
+    background-color: #d94860;
+}
+
 /*-- delete mode --*/
 .ftables.delete-mode .ship-table:hover
 {
