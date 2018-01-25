@@ -152,6 +152,7 @@ function equipTexttoNum(text)
         return 3;
 
         case "Torpedoes":
+        case "Torpedo":
         return 4;
 
         case "Fighter":
