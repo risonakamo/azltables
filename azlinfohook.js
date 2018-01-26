@@ -229,6 +229,9 @@ function countryConvert(country)
 
         case "Eagle Union":
         return "us";
+
+        case "Neptunia":
+        return "nep";
     }
 
     return "missing";

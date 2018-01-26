@@ -62,7 +62,8 @@ a
     margin-top: -10px;
 }
 
-.title-box img.de
+/*-- country image modification --*/
+.title-box img.de,.title-box img.nep
 {
     margin-top: -7px;
 }
