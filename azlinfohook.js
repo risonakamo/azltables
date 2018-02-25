@@ -232,6 +232,9 @@ function countryConvert(country)
 
         case "Neptunia":
         return "nep";
+
+        case "Eastern Radiance":
+        return "cn";
     }
 
     return "missing";
