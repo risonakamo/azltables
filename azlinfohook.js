@@ -38,9 +38,9 @@
     }
 
     res.name=doc.querySelector("#firstHeading").innerText;
-    res.class=tables[0].children[3].children[3].firstElementChild.innerText;
+    res.class=classConvert(tables[0].children[3].children[1].children[1].innerText);
     res.country=countryConvert(tables[0].children[2].children[1].children[1].innerText);
-    res.rarity=rareToColour(tables[0].children[1].children[4].innerHTML.split("<br>")[0]);
+    res.rarity=rareToColour2(tables[0].children[1].firstElementChild.style.backgroundColor);
     res.image=tables[0].children[1].firstElementChild.firstElementChild.firstElementChild.src;
     res.link=window.location.href;
 
@@ -196,6 +196,7 @@ function convertSkillColour(colour)
     return "";
 }
 
+//not working after wiki changed to using stars and an image for rarity
 function rareToColour(rarity)
 {
     switch (rarity)
@@ -210,6 +211,24 @@ function rareToColour(rarity)
         return "blue";
 
         case "Normal":
+        return "grey";
+    }
+}
+
+function rareToColour2(rarity)
+{
+    switch (rarity)
+    {
+        case "plum":
+        return "purple";
+
+        case "palegoldenrod":
+        return "gold";
+
+        case "powderblue":
+        return "blue";
+
+        case "gainsboro":
         return "grey";
     }
 }
@@ -238,4 +257,35 @@ function countryConvert(country)
     }
 
     return "missing";
+}
+
+function classConvert(shipclass)
+{
+    switch (shipclass)
+    {
+        case "Destroyer":
+        return "DD";
+
+        case "Light Cruiser":
+        return "CL";
+
+        case "Heavy Cruiser":
+        return "CA";
+
+        case "Battleship":
+        return "BB";
+
+        case "Monitor":
+        return "BM";
+
+        case "Battlecruiser":
+        return "BC";
+
+        case "Aircraft Carrier":
+        return "CV";
+
+        case "Light Aircraft Carrier":
+        return "CVL";
+
+    }
 }
