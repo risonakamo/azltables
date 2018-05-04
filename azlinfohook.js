@@ -156,12 +156,15 @@ function equipTexttoNum(text)
         return 4;
 
         case "Fighter":
+        case "Fighters":
         return 5;
 
         case "Dive Bomber":
+        case "Dive Bombers":
         return 6;
 
         case "Torpedo Bomber":
+        case "Torpedo Bombers":
         return 7;
 
         case "Auxiliary Equipment":
@@ -172,8 +175,12 @@ function equipTexttoNum(text)
 
         case "DD/CL Main Guns (Seaplane on retrofit)":
         case "DD/CL Main Guns":
+        case "CL/DD Main Guns":
         case "CL Guns, DD guns":
         return 11;
+
+        case "CL Main Guns (CA Main Guns on retrofit)":
+        return 13;
     }
 
     return 12;
@@ -215,6 +222,7 @@ function rareToColour(rarity)
     }
 }
 
+//convert css rarity colour to actual rarity colour
 function rareToColour2(rarity)
 {
     switch (rarity)
@@ -233,6 +241,7 @@ function rareToColour2(rarity)
     }
 }
 
+//convert country string to shortened country string
 function countryConvert(country)
 {
     switch (country)
