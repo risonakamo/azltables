@@ -168,6 +168,7 @@ function equipTexttoNum(text)
         return 7;
 
         case "Auxiliary Equipment":
+        case "Auxilliary":
         return 8;
 
         case "Anti-Air Guns":
@@ -296,5 +297,7 @@ function classConvert(shipclass)
         case "Light Aircraft Carrier":
         return "CVL";
 
+        case "Repair Ship":
+        return "AR";
     }
 }
