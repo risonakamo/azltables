@@ -9,7 +9,7 @@ var _fleetsId=0;
 function main()
 {
     var ftables=document.querySelector(".ftables");
-    _shipClasses=["DD","CL","CA","BB","BM","BC","CV","CVL","AR"];
+    _shipClasses=["DD","CL","CA","BB","BM","BC","BBV","CV","CVL","AR"];
     chrome.storage.local.get(_shipClasses,(data)=>{
         var currentClassShips;
         var currentShip;

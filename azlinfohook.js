@@ -55,8 +55,14 @@
         }
     }
 
+    var remodeloffset=0;
+    if (tables[5].firstElementChild.innerText!="Equipment")
+    {
+        remodeloffset=1;
+    }
+
     //grabbing skills
-    var skilltablerows=tables[6].children;
+    var skilltablerows=tables[6+remodeloffset].children;
     var skills=[];
     var skillcolour;
     for (var x=1;x<skilltablerows.length;x++)
@@ -102,12 +108,12 @@
 
     //getting scalings
     var scaling={};
-    // scaling.gun=stattablerows[1].children[0].innerText.slice(-1);
-    // scaling.hp=stattablerows[2].children[0].innerText.slice(-1);
-    // scaling.antiair=stattablerows[3].children[0].innerText.slice(-1);
-    // scaling.dodge=stattablerows[4].children[0].innerText.slice(-1);
-    // scaling.planes=stattablerows[5].children[0].innerText.slice(-1);
-    // scaling.torpedo=stattablerows[6].children[0].innerText.slice(-1);
+    scaling.gun="FFF";
+    scaling.hp="FFF";
+    scaling.antiair="FFF";
+    scaling.dodge="FFF";
+    scaling.planes="FFF";
+    scaling.torpedo="FFF";
 
     res.scaling=scaling;
 
@@ -117,15 +123,15 @@
         res.torpedoAble=1;
     }
 
-    // //check if antiair dd
-    // if (res.class=="DD" &&
-    //     (scaling.antiair=="C" || scaling.antiair=="B" || scaling.antiair=="A"))
-    // {
-    //     res.antiairDD=1;
-    // }
+    //check if antiair dd
+    if (res.class=="DD" &&
+        (scaling.antiair=="C" || scaling.antiair=="B" || scaling.antiair=="A"))
+    {
+        res.antiairDD=1;
+    }
 
     //grab equipment
-    var equiptable=tables[5].children;
+    var equiptable=tables[5+remodeloffset].children;
     res.equipment=[];
     res.equipment.push(equipTexttoNum(equiptable[2].children[2].innerText));
     res.equipment.push(equipTexttoNum(equiptable[3].children[2].innerText));
