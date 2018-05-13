@@ -38,10 +38,10 @@
     }
 
     res.name=doc.querySelector("#firstHeading").innerText;
-    res.class=classConvert(tables[0].children[3].children[1].children[1].innerText);
-    res.country=countryConvert(tables[0].children[2].children[1].children[1].innerText);
-    res.rarity=rareToColour2(tables[0].children[1].firstElementChild.style.backgroundColor);
-    res.image=tables[0].children[1].firstElementChild.firstElementChild.firstElementChild.src;
+    res.class=classConvert(tables[1].children[2].children[1].children[1].innerText);
+    res.country=countryConvert(tables[1].children[1].children[1].children[1].innerText);
+    res.rarity=rareToColour2(tables[0].children[1].children[1].style.backgroundColor);
+    res.image=doc.querySelector(".image").firstElementChild.src;
     res.link=window.location.href;
 
     //identifying if remodel
@@ -56,7 +56,7 @@
     }
 
     //grabbing skills
-    var skilltablerows=tables[3].children;
+    var skilltablerows=tables[6].children;
     var skills=[];
     var skillcolour;
     for (var x=1;x<skilltablerows.length;x++)
@@ -77,37 +77,37 @@
 
     res.skills=skills;
 
-    var stattablerows=tables[1].children;
+    var stattablerows=tables[3].children;
 
     //grabbing stats
     var stats={};
-    var statrow=stattablerows[8].children;
+    var statrow=stattablerows[0].children;
     stats.hp=statrow[0].innerText.split("→").pop();
     stats.armour=statrow[1].innerText;
     stats.reload=statrow[2].innerText.split("→").pop();
 
-    statrow=stattablerows[9].children;
+    statrow=stattablerows[1].children;
     stats.gun=statrow[0].innerText.split("→").pop();
     stats.torpedo=statrow[1].innerText.split("→").pop();
     stats.dodge=statrow[2].innerText.split("→").pop();
 
-    statrow=stattablerows[10].children;
+    statrow=stattablerows[2].children;
     stats.antiair=statrow[0].innerText.split("→").pop();
     stats.planes=statrow[1].innerText.split("→").pop();
     stats.gas=statrow[2].innerText.split("→").pop();
 
-    stats.speed=stattablerows[11].innerText.slice(7).split("→").pop();
+    stats.speed=stattablerows[3].children[1].innerText.split("→").pop();
 
     res.stats=stats;
 
     //getting scalings
     var scaling={};
-    scaling.gun=stattablerows[1].children[0].innerText.slice(-1);
-    scaling.hp=stattablerows[2].children[0].innerText.slice(-1);
-    scaling.antiair=stattablerows[3].children[0].innerText.slice(-1);
-    scaling.dodge=stattablerows[4].children[0].innerText.slice(-1);
-    scaling.planes=stattablerows[5].children[0].innerText.slice(-1);
-    scaling.torpedo=stattablerows[6].children[0].innerText.slice(-1);
+    // scaling.gun=stattablerows[1].children[0].innerText.slice(-1);
+    // scaling.hp=stattablerows[2].children[0].innerText.slice(-1);
+    // scaling.antiair=stattablerows[3].children[0].innerText.slice(-1);
+    // scaling.dodge=stattablerows[4].children[0].innerText.slice(-1);
+    // scaling.planes=stattablerows[5].children[0].innerText.slice(-1);
+    // scaling.torpedo=stattablerows[6].children[0].innerText.slice(-1);
 
     res.scaling=scaling;
 
@@ -117,19 +117,19 @@
         res.torpedoAble=1;
     }
 
-    //check if antiair dd
-    if (res.class=="DD" &&
-        (scaling.antiair=="C" || scaling.antiair=="B" || scaling.antiair=="A"))
-    {
-        res.antiairDD=1;
-    }
+    // //check if antiair dd
+    // if (res.class=="DD" &&
+    //     (scaling.antiair=="C" || scaling.antiair=="B" || scaling.antiair=="A"))
+    // {
+    //     res.antiairDD=1;
+    // }
 
     //grab equipment
-    var equiptable=tables[4].children;
+    var equiptable=tables[5].children;
     res.equipment=[];
-    res.equipment.push(equipTexttoNum(equiptable[2].children[3].innerText));
-    res.equipment.push(equipTexttoNum(equiptable[3].children[3].innerText));
-    res.equipment.push(equipTexttoNum(equiptable[4].children[3].innerText));
+    res.equipment.push(equipTexttoNum(equiptable[2].children[2].innerText));
+    res.equipment.push(equipTexttoNum(equiptable[3].children[2].innerText));
+    res.equipment.push(equipTexttoNum(equiptable[4].children[2].innerText));
 
     console.log(res);
     return res;
@@ -282,6 +282,7 @@ function classConvert(shipclass)
         case "Heavy Cruiser":
         return "CA";
 
+        case "Aviation Battleship":
         case "Battleship":
         return "BB";
 
