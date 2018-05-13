@@ -38,7 +38,7 @@
     }
 
     res.name=doc.querySelector("#firstHeading").innerText;
-    res.class=classConvert(tables[1].children[2].children[1].children[1].innerText);
+    res.class=classConvert(tables[1].children[2].children[1].lastElementChild.innerText);
     res.country=countryConvert(tables[1].children[1].children[1].children[1].innerText);
     res.rarity=rareToColour2(tables[0].children[1].children[1].style.backgroundColor);
     res.image=doc.querySelector(".image").firstElementChild.src;
@@ -282,7 +282,6 @@ function classConvert(shipclass)
         case "Heavy Cruiser":
         return "CA";
 
-        case "Aviation Battleship":
         case "Battleship":
         return "BB";
 
@@ -300,5 +299,8 @@ function classConvert(shipclass)
 
         case "Repair Ship":
         return "AR";
+
+        case "Aviation Battleship":
+        return "BBV";
     }
 }

@@ -438,6 +438,11 @@ a
     -webkit-mask-image: url("/shiptable/icon/aa.png");
 }
 
+.scalestat
+{
+    background-color: #4a3d3a;
+}
+
 .statbox.A .scalestat,.statbox.S .scalestat
 {
     background-color: #cea642;
