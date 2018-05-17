@@ -83,58 +83,32 @@
 
     res.skills=skills;
 
-    var stattablerows=tables[3].children;
+    res.stats=extractStats(tables[3]);
 
-    //grabbing stats
-    var stats={};
-    var statrow=stattablerows[0].children;
-    stats.hp=statrow[0].innerText;
-    stats.armour=statrow[1].innerText;
-    stats.reload=statrow[2].innerText;
+    res.scaling=res.stats.scaling;
+    res.stats=res.stats.stats;
 
-    statrow=stattablerows[1].children;
-    stats.gun=statrow[0].innerText;
-    stats.torpedo=statrow[1].innerText;
-    stats.dodge=statrow[2].innerText;
-
-    statrow=stattablerows[2].children;
-    stats.antiair=statrow[0].innerText;
-    stats.planes=statrow[1].innerText;
-    stats.gas=statrow[2].innerText;
-
-    stats.speed=stattablerows[3].children[1].innerText;
-
-    var scaling={};
-    var reg=/ ?(\d+→)?(\d+)(\s?\((\w)(\s→\s(\w))?\))?/;
-    var regmatch;
-    for (var x in stats)
+    //if scalings werent on the first page of stats, try the second (rare case)
+    if (!res.scaling.hp)
     {
-        if (x=="armour" || x=="speed")
-        {
-            continue;
-        }
-
-        regmatch=stats[x].match(reg);
-        stats[x]=regmatch[2];
-
-        if (regmatch[4])
-        {
-            scaling[x]=regmatch[4];
-        }
+        res.scaling=extractStats(tables[4]).scaling;
     }
 
-    res.stats=stats;
-    res.scaling=scaling;
+    //work around armour 0
+    if (res.stats.armour.length<3)
+    {
+        res.stats.armour=tables[4].children[0].children[1].innerText;
+    }
 
     //check torpedo capable
-    if (parseInt(stats.torpedo))
+    if (parseInt(res.stats.torpedo))
     {
         res.torpedoAble=1;
     }
 
     //check if antiair dd
     if (res.class=="DD" &&
-        (scaling.antiair=="C" || scaling.antiair=="B" || scaling.antiair=="A"))
+        (res.scaling.antiair=="C" || res.scaling.antiair=="B" || res.scaling.antiair=="A"))
     {
         res.antiairDD=1;
     }
@@ -150,6 +124,8 @@
     return res;
 })()
 
+//convert equipment string to number of equipment used for
+//equipment images
 function equipTexttoNum(text)
 {
     switch (text)
@@ -284,6 +260,7 @@ function countryConvert(country)
     return "missing";
 }
 
+//convert class string
 function classConvert(shipclass)
 {
     switch (shipclass)
@@ -318,4 +295,50 @@ function classConvert(shipclass)
         case "Aviation Battleship":
         return "BBV";
     }
+}
+
+//give it the root element table of stats
+function extractStats(stattablerows)
+{
+    stattablerows=stattablerows.children;
+
+    //grabbing stats
+    var stats={};
+    var statrow=stattablerows[0].children;
+    stats.hp=statrow[0].innerText;
+    stats.armour=statrow[1].innerText;
+    stats.reload=statrow[2].innerText;
+
+    statrow=stattablerows[1].children;
+    stats.gun=statrow[0].innerText;
+    stats.torpedo=statrow[1].innerText;
+    stats.dodge=statrow[2].innerText;
+
+    statrow=stattablerows[2].children;
+    stats.antiair=statrow[0].innerText;
+    stats.planes=statrow[1].innerText;
+    stats.gas=statrow[2].innerText;
+
+    stats.speed=stattablerows[3].children[1].innerText;
+
+    var scaling={};
+    var reg=/ ?(\d+→)?(\d+)(\s?\((\w)(\s→\s(\w))?\))?/;
+    var regmatch;
+    for (var x in stats)
+    {
+        if (x=="armour")
+        {
+            continue;
+        }
+
+        regmatch=stats[x].match(reg);
+        stats[x]=regmatch[2];
+
+        if (regmatch[4])
+        {
+            scaling[x]=regmatch[4];
+        }
+    }
+
+    return {stats:stats,scaling:scaling};
 }
