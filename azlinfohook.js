@@ -88,33 +88,42 @@
     //grabbing stats
     var stats={};
     var statrow=stattablerows[0].children;
-    stats.hp=statrow[0].innerText.split("→").pop();
+    stats.hp=statrow[0].innerText;
     stats.armour=statrow[1].innerText;
-    stats.reload=statrow[2].innerText.split("→").pop();
+    stats.reload=statrow[2].innerText;
 
     statrow=stattablerows[1].children;
-    stats.gun=statrow[0].innerText.split("→").pop();
-    stats.torpedo=statrow[1].innerText.split("→").pop();
-    stats.dodge=statrow[2].innerText.split("→").pop();
+    stats.gun=statrow[0].innerText;
+    stats.torpedo=statrow[1].innerText;
+    stats.dodge=statrow[2].innerText;
 
     statrow=stattablerows[2].children;
-    stats.antiair=statrow[0].innerText.split("→").pop();
-    stats.planes=statrow[1].innerText.split("→").pop();
-    stats.gas=statrow[2].innerText.split("→").pop();
+    stats.antiair=statrow[0].innerText;
+    stats.planes=statrow[1].innerText;
+    stats.gas=statrow[2].innerText;
 
-    stats.speed=stattablerows[3].children[1].innerText.split("→").pop();
+    stats.speed=stattablerows[3].children[1].innerText;
+
+    var scaling={};
+    var reg=/ ?(\d+→)?(\d+)(\s?\((\w)(\s→\s(\w))?\))?/;
+    var regmatch;
+    for (var x in stats)
+    {
+        if (x=="armour" || x=="speed")
+        {
+            continue;
+        }
+
+        regmatch=stats[x].match(reg);
+        stats[x]=regmatch[2];
+
+        if (regmatch[4])
+        {
+            scaling[x]=regmatch[4];
+        }
+    }
 
     res.stats=stats;
-
-    //getting scalings
-    var scaling={};
-    scaling.gun="FFF";
-    scaling.hp="FFF";
-    scaling.antiair="FFF";
-    scaling.dodge="FFF";
-    scaling.planes="FFF";
-    scaling.torpedo="FFF";
-
     res.scaling=scaling;
 
     //check torpedo capable
