@@ -293,7 +293,7 @@ class _menucontroller
         }
 
         _fleets.push(res);
-        chrome.storage.local.set({fleets:_fleets});
+        chrome.storage.local.set({fleets:_fleets,fleetsId:_fleetsId});
 
         this.fleetList.insertAdjacentElement("afterbegin",this.genFleetEntry(res));
     }
