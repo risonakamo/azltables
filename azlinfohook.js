@@ -322,7 +322,7 @@ function extractStats(stattablerows)
     stats.speed=stattablerows[3].children[1].innerText;
 
     var scaling={};
-    var reg=/ ?(\d+→)?(\d+)(\s?\((\w)(\s→\s(\w))?\))?/;
+    var reg=/ ?(\d+→)?(\d+)(\s?\((\w)(\s?→\s?(\w))?\))?/;
     var regmatch;
     for (var x in stats)
     {
