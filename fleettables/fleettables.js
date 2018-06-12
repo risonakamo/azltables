@@ -58,7 +58,8 @@ function showDatabase()
 }
 
 //due to submarine update asw stats may be missing. use this to force them to "?"
-function forceASW()
+//also updates armour stat for new layout with asw stat
+function submarineUpdate()
 {
     var shipclassArray;
     chrome.storage.local.get(null,(d)=>{
@@ -71,6 +72,8 @@ function forceASW()
                 {
                     shipclassArray[y].stats.asw="?";
                 }
+
+                shipclassArray[y].stats.armour=armourConvert(shipclassArray[y].stats.armour);
             }
         }
 
@@ -106,4 +109,24 @@ function filterShips(ships)
             _ships[x].classList.remove("hidden");
         }
     }
+}
+
+function armourConvert(armour)
+{
+    switch (armour)
+    {
+        case " Light":
+        case "Light":
+        return "軽";
+
+        case " Medium":
+        case "Medium":
+        return "中";
+
+        case " Heavy":
+        case "Heavy":
+        return "重";
+    }
+
+    return armour;
 }

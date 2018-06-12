@@ -89,15 +89,17 @@
     res.stats=res.stats.stats;
 
     //if scalings werent on the first page of stats, try the second (rare case)
+    //of course, only take the scalings
     if (!res.scaling.hp)
     {
+        console.log("scalings missing on first tab");
         res.scaling=extractStats(tables[4]).scaling;
     }
 
     //work around armour 0
     if (res.stats.armour.length<3)
     {
-        res.stats.armour=tables[4].children[0].children[1].innerText;
+        res.stats.armour=armourConvert(tables[4].children[0].children[1].innerText.replace(/\s/g,""));
     }
 
     //check torpedo capable
@@ -306,7 +308,7 @@ function extractStats(stattablerows)
     var stats={};
     var statrow=stattablerows[0].children;
     stats.hp=statrow[0].innerText;
-    stats.armour=statrow[1].innerText;
+    stats.armour=armourConvert(statrow[1].innerText.replace(/\s/g,""));
     stats.reload=statrow[2].innerText;
 
     statrow=stattablerows[1].children;
@@ -334,6 +336,15 @@ function extractStats(stattablerows)
         }
 
         regmatch=stats[x].match(reg);
+
+        //in rare case that stats are empty, or it is now on
+        //the 2nd page as there were no scalings on the first
+        if (!regmatch)
+        {
+            stats[x]="";
+            continue;
+        }
+
         stats[x]=regmatch[2];
 
         if (regmatch[4])
@@ -343,4 +354,21 @@ function extractStats(stattablerows)
     }
 
     return {stats:stats,scaling:scaling};
+}
+
+function armourConvert(armour)
+{
+    switch (armour)
+    {
+        case "Light":
+        return "軽";
+
+        case "Medium":
+        return "中";
+
+        case "Heavy":
+        return "重";
+    }
+
+    return "err";
 }
