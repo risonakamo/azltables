@@ -96,10 +96,10 @@
         res.scaling=extractStats(tables[4]).scaling;
     }
 
-    //work around armour 0
-    if (res.stats.armour.length<3)
+    //work around for rare armour 0 case
+    if (res.stats.armour=="err")
     {
-        res.stats.armour=armourConvert(tables[4].children[0].children[1].innerText.replace(/\s/g,""));
+        res.stats.armour=armourConvert(tables[4].children[0].children[1].innerText);
     }
 
     //check torpedo capable
@@ -308,7 +308,7 @@ function extractStats(stattablerows)
     var stats={};
     var statrow=stattablerows[0].children;
     stats.hp=statrow[0].innerText;
-    stats.armour=armourConvert(statrow[1].innerText.replace(/\s/g,""));
+    stats.armour=armourConvert(statrow[1].innerText);
     stats.reload=statrow[2].innerText;
 
     statrow=stattablerows[1].children;
@@ -360,12 +360,15 @@ function armourConvert(armour)
 {
     switch (armour)
     {
+        case " Light":
         case "Light":
         return "軽";
 
+        case " Medium":
         case "Medium":
         return "中";
 
+        case " Heavy":
         case "Heavy":
         return "重";
     }
