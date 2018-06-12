@@ -57,6 +57,16 @@ function showDatabase()
     });
 }
 
+function updateASW()
+{
+    chrome.storage.local.get(null,(d)=>{
+        for (var x=0;x<_shipClasses.length;x++)
+        {
+
+        }
+    });
+}
+
 //give array of ship names to filter to those ships only
 //give it empty array or 0 to show all again
 function filterShips(ships)

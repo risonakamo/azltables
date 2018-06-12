@@ -319,7 +319,9 @@ function extractStats(stattablerows)
     stats.planes=statrow[1].innerText;
     stats.gas=statrow[2].innerText;
 
-    stats.speed=stattablerows[3].children[1].innerText;
+    stats.asw=stattablerows[3].firstElementChild.innerText;
+
+    stats.speed=stattablerows[4].children[1].innerText;
 
     var scaling={};
     var reg=/ ?(\d+→)?(\d+)(\s?\((\w)(\s?→\s?(\w))?\))?/;
