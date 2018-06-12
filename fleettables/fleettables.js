@@ -57,13 +57,24 @@ function showDatabase()
     });
 }
 
-function updateASW()
+//due to submarine update asw stats may be missing. use this to force them to "?"
+function forceASW()
 {
+    var shipclassArray;
     chrome.storage.local.get(null,(d)=>{
         for (var x=0;x<_shipClasses.length;x++)
         {
-
+            shipclassArray=d[_shipClasses[x]];
+            for (var y=0,l=shipclassArray.length;y<l;y++)
+            {
+                if (!shipclassArray[y].stats.asw)
+                {
+                    shipclassArray[y].stats.asw="?";
+                }
+            }
         }
+
+        chrome.storage.local.set(d);
     });
 }
 
