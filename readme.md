@@ -21,3 +21,11 @@ im not sure if you can really call these tables though
 - saved tables will appear on the "fleet" screen of the extension, accessible by clicking the fleet button available in the extension popup window
 - fleets can be created from the saved ships. make sure to input a name for the fleet. the members of a fleet can be changed at any time.
 - the menu is accessible by hovering in the bottom right corner
+
+### changes v1.0 → 1.7
+- script improvements/changes
+- submarine/other classes support
+- kai class change support
+- table now looks like this
+
+![](https://i.imgur.com/RHJX7Q7.png)
