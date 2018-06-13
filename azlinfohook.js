@@ -30,7 +30,7 @@
 (()=>{
     var doc=document;
     var res={};
-    var tables=doc.querySelectorAll(".wikitable tbody");
+    var tables=doc.querySelectorAll(".wikitable>tbody");
 
     if (!tables)
     {
