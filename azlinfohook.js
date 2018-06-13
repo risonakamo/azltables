@@ -83,7 +83,7 @@
 
     res.skills=skills;
 
-    res.stats=extractStats(tables[3]);
+    res.stats=extractStats(tables[3],res.class);
 
     res.scaling=res.stats.scaling;
     res.stats=res.stats.stats;
@@ -303,7 +303,7 @@ function classConvert(shipclass)
 }
 
 //give it the root element table of stats
-function extractStats(stattablerows)
+function extractStats(stattablerows,sclass="")
 {
     stattablerows=stattablerows.children;
 
@@ -324,7 +324,17 @@ function extractStats(stattablerows)
     stats.planes=statrow[1].innerText;
     stats.gas=statrow[2].innerText;
 
-    stats.asw=stattablerows[3].firstElementChild.innerText;
+    if (sclass!="SS")
+    {
+        stats.asw=stattablerows[3].firstElementChild.innerText;
+    }
+
+    else
+    {
+        statrow=stattablerows[3].children;
+        stats.oxy=statrow[0].innerText;
+        stats.ammo=statrow[1].innerText;
+    }
 
     stats.speed=stattablerows[4].children[1].innerText;
 
