@@ -227,6 +227,11 @@ body
     background: linear-gradient(0deg, rgba(146,124,243,1) 50%, rgba(255,105,90,1) 50%);
 }
 
+.fleet-list .fleet-entry img.SS
+{
+    background-color: #9ed945;
+}
+
 /*-- delete mode --*/
 .ftables.delete-mode .ship-table:hover
 {

@@ -206,6 +206,11 @@ a
     background: linear-gradient(0deg, rgba(146,124,243,1) 50%, rgba(255,105,90,1) 50%);
 }
 
+.class-box.SS
+{
+    background-color: #9ed945;
+}
+
 .class-box img
 {
     height: 16px;

@@ -44,7 +44,7 @@ function genClassString(sclass,aa,torp,kai)
     var res="";
     res+=`<img src="/shiptable/class/${sclass}.png">`;
 
-    if (sclass!="DD" && torp)
+    if (sclass!="DD" && sclass!="SS" && torp)
     {
         res+=`<img src="/shiptable/class/DD.png">`;
     }

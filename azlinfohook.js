@@ -291,6 +291,9 @@ function classConvert(shipclass)
         case "Light Aircraft Carrier":
         return "CVL";
 
+        case "Submarine":
+        return "SS";
+
         case "Repair Ship":
         return "AR";
 
