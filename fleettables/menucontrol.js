@@ -332,11 +332,19 @@ class _menucontroller
     genShipString(classes)
     {
         var shipsString="";
-        for (var x in classes)
+
+        var classAmount;
+        for (var x=0;x<_shipClasses.length;x++)
         {
-            for (var y=0;y<classes[x];y++)
+            if (!classes[_shipClasses[x]])
             {
-                shipsString+=`<img class="${x}" src="/shiptable/class/${x}.png">`;
+                continue;
+            }
+
+            classAmount=classes[_shipClasses[x]];
+            for (var y=0;y<classAmount;y++)
+            {
+                shipsString+=`<img class="${_shipClasses[x]}" src="/shiptable/class/${_shipClasses[x]}.png">`;
             }
         }
 
