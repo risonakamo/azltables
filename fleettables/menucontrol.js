@@ -237,6 +237,13 @@ class _menucontroller
     {
         if (!this.fleetCreate)
         {
+            var selected=this.shiptableContainer.querySelectorAll(".selected");
+
+            for (var x=0,l=selected.length;x<l;x++)
+            {
+                selected[x].classList.remove("selected");
+            }
+
             this.fleetCreate=1;
             this.buttonsText[1].innerText="cancel create fleet";
             this.shiptableContainer.classList.toggle("select-mode");
