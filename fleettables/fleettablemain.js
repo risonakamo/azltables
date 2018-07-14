@@ -25,6 +25,7 @@ function main()
             _fleetsId=data.fleetsId;
         }
 
+        ReactDOM.render(React.createElement(MenuControl,{fleets:_fleets}),document.querySelector(".trigger-zone"));
     });
 }
 
