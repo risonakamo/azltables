@@ -60,8 +60,33 @@ class ShipTable extends React.Component
 
                                     React.createElement("div",{className:"text"},`${this.props.data.stats[x[0]]}`)
                                 )
-                        })
+                        }),
 
+                        ["reload","speed","gas"].map((x,i)=>{
+                            return React.createElement("div",{className:"statbox",title:x},
+                                React.createElement("div",{className:"img-holder"},
+                                    React.createElement("img",{src:`/shiptable/icon/${x}.png`})
+                                ),
+
+                                React.createElement("div",{className:"text"},this.props.data.stats[x])
+                            )
+                        }),
+
+                        [], //submarine stats
+
+                        React.createElement("div",{className:"statbox",title:"armour"},
+                            React.createElement("div",{className:"img-holder"},
+                                React.createElement("img",{src:`/shiptable/icon/armour.png`})
+                            ),
+
+                            React.createElement("div",{className:"text"},this.props.data.stats.armour)
+                        )
+                    )
+                ),
+
+                React.createElement("div",{className:"right"},
+                    React.createElement("div",{className:"skill-zone"},
+                        [] //skillstring
                     )
                 )
             )
