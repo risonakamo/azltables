@@ -8,32 +8,10 @@ var _fleetsId=0;
 
 function main()
 {
-    var ftables=document.querySelector(".ftables");
     //order of shipclass appearance
     _shipClasses=["DD","CL","CA","BB","BM","BC","BBV","CV","CVL","AR","SS"];
     chrome.storage.local.get(_shipClasses,(data)=>{
-        var currentClassShips;
-        var currentShip;
-        for (var x=0;x<_shipClasses.length;x++)
-        {
-            currentClassShips=data[_shipClasses[x]];
-
-            if (!currentClassShips)
-            {
-                continue;
-            }
-
-            for (var y=0;y<currentClassShips.length;y++)
-            {
-                // ftables.insertAdjacentHTML("beforeend",genShipTable(currentClassShips[y]));
-
-                currentShip=genShipTableElement(currentClassShips[y]);
-                _ships.push(currentShip);
-                ftables.appendChild(currentShip);
-            }
-        }
-
-        menucontroller=new _menucontroller;
+        ReactDOM.render(React.createElement(FleetTable,{ships:data,shipClasses:_shipClasses}),document.querySelector(".ftables"));
     });
 
     chrome.storage.local.get(["fleets","fleetsId"],(data)=>{
@@ -47,7 +25,6 @@ function main()
             _fleetsId=data.fleetsId;
         }
 
-        menucontroller.initFleetMenu();
     });
 }
 
