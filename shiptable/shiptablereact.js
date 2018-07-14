@@ -5,6 +5,7 @@ class ShipTable extends React.Component
     {
         super(props);
         this.nonScalingStatBox=this.nonScalingStatBox.bind(this);
+        this.classBox=this.classBox.bind(this);
     }
 
     //produce a non scaling statbox with specified title (text that
@@ -26,6 +27,41 @@ class ShipTable extends React.Component
         );
     }
 
+    //returns the elements making up the classbox part
+    classBox()
+    {
+        var res=[React.createElement("img",{src:`/shiptable/class/${sclass}.png">`})];
+
+        if (this.props.data.class!="DD" && this.props.data.class!="SS" && this.props.data.torpedoAble)
+        {
+            res.push(React.createElement("img",{src:"/shiptable/class/DD.png"}));
+        }
+
+        else if (this.props.data.class=="DD" && this.props.data.antiairDD)
+        {
+            res.push(React.createElement("img",{src:"/shiptable/class/CL.png"}));
+        }
+
+        res.push(React.createElement("div",{className:"label"},this.props.data.class));
+
+        if (this.props.data.remodel)
+        {
+            res.push(React.createElement("div",{className:"label"},"改"));
+        }
+
+        return res;
+    }
+
+    skillBoxes()
+    {
+        return this.props.data.skills.map((x,i)=>{
+            return React.createElement("div",{className:"skill-box"},
+                React.createElement("div",{className:`name ${x.colour}`},x.name),
+                React.createElement("div",{className:"description"},x.description)
+            );
+        });
+    }
+
     render()
     {
         return React.createElement("div",{className:"ship-table"},
@@ -42,7 +78,7 @@ class ShipTable extends React.Component
                 React.createElement("div",{className:"left"},
                     React.createElement("div",{className:`portrait-zone ${this.props.data.rarity}`},
                         React.createElement("div",{className:`class-box ${this.props.data.class}`},
-                            [] //genclassstring stuff goes here
+                            this.classBox()
                         ),
 
                         React.createElement("img",{className:"portrait",src:this.props.data.image})
@@ -114,7 +150,7 @@ class ShipTable extends React.Component
 
                 React.createElement("div",{className:"right"},
                     React.createElement("div",{className:"skill-zone"},
-                        [] //skillstring
+                        this.skillBoxes()
                     )
                 )
             )
