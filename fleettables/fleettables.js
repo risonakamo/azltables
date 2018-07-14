@@ -9,6 +9,7 @@ var _fleetsId=0;
 function main()
 {
     var ftables=document.querySelector(".ftables");
+    //order of shipclass appearance
     _shipClasses=["DD","CL","CA","BB","BM","BC","BBV","CV","CVL","AR","SS"];
     chrome.storage.local.get(_shipClasses,(data)=>{
         var currentClassShips;
