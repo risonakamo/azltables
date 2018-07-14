@@ -1,6 +1,31 @@
 //ShipTable(object data)
 class ShipTable extends React.Component
 {
+    constructor(props)
+    {
+        super(props);
+        this.nonScalingStatBox=this.nonScalingStatBox.bind(this);
+    }
+
+    //produce a non scaling statbox with specified title (text that
+    //appears on hover), and data name (name of image icon and name in
+    //data.stats object)
+    nonScalingStatBox(title,dataName)
+    {
+        if (!dataName)
+        {
+            dataName=title;
+        }
+
+        return React.createElement("div",{className:"statbox",title:title},
+            React.createElement("div",{className:"img-holder"},
+                React.createElement("img",{src:`/shiptable/icon/${dataName}.png`})
+            ),
+
+            React.createElement("div",{className:"text"},this.props.data.stats[dataName])
+        );
+    }
+
     render()
     {
         return React.createElement("div",{className:"ship-table"},
@@ -59,28 +84,31 @@ class ShipTable extends React.Component
                                     ),
 
                                     React.createElement("div",{className:"text"},`${this.props.data.stats[x[0]]}`)
-                                )
+                                );
                         }),
 
                         ["reload","speed","gas"].map((x,i)=>{
-                            return React.createElement("div",{className:"statbox",title:x},
-                                React.createElement("div",{className:"img-holder"},
-                                    React.createElement("img",{src:`/shiptable/icon/${x}.png`})
-                                ),
-
-                                React.createElement("div",{className:"text"},this.props.data.stats[x])
-                            )
+                            return this.nonScalingSkillBox(x);
                         }),
 
-                        [], //submarine stats
+                        (()=>{
+                            var subboxes=[];
+                            if (this.props.data.class=="SS")
+                            {
+                                subboxes=[["anti sub","asw"]];
+                            }
 
-                        React.createElement("div",{className:"statbox",title:"armour"},
-                            React.createElement("div",{className:"img-holder"},
-                                React.createElement("img",{src:`/shiptable/icon/armour.png`})
-                            ),
+                            else
+                            {
+                                subboxes=[["oxygen","oxy"],["ammo","ammo"]];
+                            }
 
-                            React.createElement("div",{className:"text"},this.props.data.stats.armour)
-                        )
+                            return subboxes.map((x)=>{
+                                return this.nonScalingStatBox(x);
+                            });
+                        })(),
+
+                        this.nonScalingStatBox("armour")
                     )
                 ),
 
@@ -90,6 +118,6 @@ class ShipTable extends React.Component
                     )
                 )
             )
-        )
+        );
     }
 }
