@@ -52,6 +52,7 @@ class ShipTable extends React.Component
         return res;
     }
 
+    //return elements making up skill boxes part
     skillBoxes()
     {
         return this.props.data.skills.map((x,i)=>{
