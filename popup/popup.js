@@ -18,6 +18,8 @@ function main()
 
                 document.querySelector(".current-ship").innerHTML=genShipTable(_currentShip);
                 document.querySelector(".buttons").classList.remove("hidden");
+
+                ReactDOM.render(React.createElement(ShipTable,{data:_currentShip}),document.querySelector(".current-ship2"));
             });
         }
     });

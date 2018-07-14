@@ -11,14 +11,14 @@ class ShipTable extends React.Component
     //produce a non scaling statbox with specified title (text that
     //appears on hover), and data name (name of image icon and name in
     //data.stats object)
-    nonScalingStatBox(title,dataName)
+    nonScalingStatBox(title,keyNum,keyString,dataName)
     {
         if (!dataName)
         {
             dataName=title;
         }
 
-        return React.createElement("div",{className:"statbox",title:title},
+        return React.createElement("div",{className:"statbox",title:title,key:`${keyString}${keyNum}`},
             React.createElement("div",{className:"img-holder"},
                 React.createElement("img",{src:`/shiptable/icon/${dataName}.png`})
             ),
@@ -30,23 +30,23 @@ class ShipTable extends React.Component
     //returns the elements making up the classbox part
     classBox()
     {
-        var res=[React.createElement("img",{src:`/shiptable/class/${sclass}.png">`})];
+        var res=[React.createElement("img",{src:`/shiptable/class/${this.props.data.class}.png`,key:"class1"})];
 
         if (this.props.data.class!="DD" && this.props.data.class!="SS" && this.props.data.torpedoAble)
         {
-            res.push(React.createElement("img",{src:"/shiptable/class/DD.png"}));
+            res.push(React.createElement("img",{src:"/shiptable/class/DD.png",key:"class2"}));
         }
 
         else if (this.props.data.class=="DD" && this.props.data.antiairDD)
         {
-            res.push(React.createElement("img",{src:"/shiptable/class/CL.png"}));
+            res.push(React.createElement("img",{src:"/shiptable/class/CL.png",key:"class3"}));
         }
 
-        res.push(React.createElement("div",{className:"label"},this.props.data.class));
+        res.push(React.createElement("div",{className:"label",key:"class4"},this.props.data.class));
 
         if (this.props.data.remodel)
         {
-            res.push(React.createElement("div",{className:"label"},"改"));
+            res.push(React.createElement("div",{className:"label",key:"class5"},"改"));
         }
 
         return res;
@@ -56,7 +56,7 @@ class ShipTable extends React.Component
     skillBoxes()
     {
         return this.props.data.skills.map((x,i)=>{
-            return React.createElement("div",{className:"skill-box"},
+            return React.createElement("div",{className:"skill-box",key:`skill${i}`},
                 React.createElement("div",{className:`name ${x.colour}`},x.name),
                 React.createElement("div",{className:"description"},x.description)
             );
@@ -125,12 +125,12 @@ class ShipTable extends React.Component
                         }),
 
                         ["reload","speed","gas"].map((x,i)=>{
-                            return this.nonScalingSkillBox(x);
+                            return this.nonScalingStatBox(x,i,"first");
                         }),
 
                         (()=>{
                             var subboxes=[];
-                            if (this.props.data.class=="SS")
+                            if (this.props.data.class!="SS")
                             {
                                 subboxes=[["anti sub","asw"]];
                             }
@@ -140,12 +140,12 @@ class ShipTable extends React.Component
                                 subboxes=[["oxygen","oxy"],["ammo","ammo"]];
                             }
 
-                            return subboxes.map((x)=>{
-                                return this.nonScalingStatBox(x);
+                            return subboxes.map((x,i)=>{
+                                return this.nonScalingStatBox(x[0],i,"second",x[1]);
                             });
                         })(),
 
-                        this.nonScalingStatBox("armour")
+                        this.nonScalingStatBox("armour",1,"armour")
                     )
                 ),
 
