@@ -165,6 +165,7 @@ class _menucontroller
             },2000);
         });
 
+        //all button
         this.triggerZone.querySelector(".all-filter").addEventListener("click",(e)=>{
             if (this.fleetLoad && !this.fleetEdit)
             {
@@ -172,6 +173,14 @@ class _menucontroller
             }
 
             filterShips(0);
+        });
+
+        //colour filters
+        var colourFilterButtons=this.triggerZone.querySelectorAll(".colour-filter");
+        ["red","blue","yellow"].map((x,i)=>{
+            colourFilterButtons[i].addEventListener("click",(e)=>{
+                skillFilter(x);
+            });
         });
     }
 

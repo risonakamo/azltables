@@ -258,11 +258,12 @@ body
 }
 
 /*-- all fleet --*/
-.fleet-entry .overflow-contain.all-filter
+.fleet-entry .overflow-contain.all-filter,.colour-filter
 {
     font-size: 13px;
     color: white;
     text-align: center;
     padding-top: 6px;
     box-sizing: border-box;
+    margin-left: 4px;
 }
