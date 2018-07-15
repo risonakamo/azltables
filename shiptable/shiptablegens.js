@@ -17,10 +17,12 @@ function genShipTableElement(data)
     var res=document.createElement("div");
     res.classList.add("ship-table");
 
+    var skillCount={blue:0,yellow:0,red:0};
     var skillsString="";
     for (var x=0;x<data.skills.length;x++)
     {
         skillsString+=genSkill(data.skills[x]);
+        skillCount[data.skills[x].colour]++;
     }
 
     //from shiptable-gen.html, but remove the topmost ship-table div
@@ -28,6 +30,7 @@ function genShipTableElement(data)
 
     res.name=data.name;
     res.class=data.class;
+    res.skillCount=skillCount;
 
     return res;
 }

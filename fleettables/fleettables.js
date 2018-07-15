@@ -111,6 +111,17 @@ function filterShips(ships)
     }
 }
 
+function skillFilter(colour)
+{
+    for (var x=0,l=_ships.length;x<l;x++)
+    {
+        if (!_ships[x].skillCount[colour])
+        {
+            _ships[x].classList.add("hidden");
+        }
+    }
+}
+
 function armourConvert(armour)
 {
     switch (armour)
