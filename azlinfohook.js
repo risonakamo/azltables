@@ -258,7 +258,7 @@ function extractStats(stattablerows,sclass="")
     var stats={};
     var statrow=stattablerows[0].children;
     stats.hp=statrow[0].innerText;
-    stats.armour=armourConvert(statrow[1].innerText);
+    stats.armour=armourConvert(statrow[1].innerText.trim());
     stats.reload=statrow[2].innerText;
 
     statrow=stattablerows[1].children;
