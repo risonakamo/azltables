@@ -32,15 +32,24 @@
     var res={};
     var tables=doc.querySelectorAll(".wikitable>tbody");
 
+    //input the index of the table related to the corresponding key. whatever that means???
+    var tableIndexes={
+        countryClass:1,
+        rarity:0,
+        stats:4,
+        equipment:6,
+        skills:7
+    };
+
     if (!tables)
     {
         return 0;
     }
 
     res.name=doc.querySelector("#firstHeading").innerText;
-    res.class=classConvert(tables[1].children[2].children[1].lastElementChild.innerText);
-    res.country=countryConvert(tables[1].children[1].children[1].children[1].innerText);
-    res.rarity=rareToColour2(tables[0].children[1].children[1].style.backgroundColor);
+    res.class=classConvert(tables[tableIndexes.countryClass].children[2].children[1].lastElementChild.innerText);
+    res.country=countryConvert(tables[tableIndexes.countryClass].children[1].children[1].children[1].innerText);
+    res.rarity=rareToColour2(tables[tableIndexes.rarity].children[1].children[1].style.backgroundColor);
     res.image=doc.querySelector(".image").firstElementChild.src;
     res.link=window.location.href;
 
@@ -52,17 +61,18 @@
         if (tabs[x].innerText=="Remodel")
         {
             res.remodel=1;
+            tableIndexes.stats-=1;
         }
     }
 
     var remodeloffset=0;
-    if (tables[5].firstElementChild.innerText!="Equipment")
+    if (tables[tableIndexes.equipment].firstElementChild.innerText!="Equipment")
     {
         remodeloffset=1;
     }
 
     //grabbing skills
-    var skilltablerows=tables[6+remodeloffset].children;
+    var skilltablerows=tables[tableIndexes.skills+remodeloffset].children;
     var skills=[];
     var skillcolour;
     for (var x=1;x<skilltablerows.length;x++)
@@ -83,7 +93,8 @@
 
     res.skills=skills;
 
-    res.stats=extractStats(tables[3],res.class);
+    //get stats
+    res.stats=extractStats(tables[tableIndexes.stats],res.class);
 
     res.scaling=res.stats.scaling;
     res.stats=res.stats.stats;
@@ -93,13 +104,13 @@
     if (!res.scaling.hp)
     {
         console.log("scalings missing on first tab");
-        res.scaling=extractStats(tables[4]).scaling;
+        res.scaling=extractStats(tables[tableIndexes.stats+1]).scaling;
     }
 
     //work around for rare armour 0 case
     if (res.stats.armour=="err")
     {
-        res.stats.armour=armourConvert(tables[4].children[0].children[1].innerText);
+        res.stats.armour=armourConvert(tables[tableIndexes.stats+1].children[0].children[1].innerText);
     }
 
     //check torpedo capable
@@ -116,7 +127,7 @@
     }
 
     //grab equipment
-    var equiptable=tables[5+remodeloffset].children;
+    var equiptable=tables[tableIndexes.equipment+remodeloffset].children;
     res.equipment=[];
     res.equipment.push(equipTexttoNum(equiptable[2].children[2].innerText));
     res.equipment.push(equipTexttoNum(equiptable[3].children[2].innerText));
