@@ -36,9 +36,9 @@
     var tableIndexes={
         countryClass:1,
         rarity:0,
-        stats:4,
-        equipment:6,
-        skills:7
+        stats:3 //number for first table of stats
+        // equipment:6, needs to be recalulated after detecting number of stat tables
+        // skills:7
     };
 
     if (!tables)
@@ -53,26 +53,29 @@
     res.image=doc.querySelector(".image").firstElementChild.src;
     res.link=window.location.href;
 
-    //identifying if remodel
-    res.remodel=0;
-    var tabs=doc.querySelectorAll(".tabbernav li");
-    for (var x=0,l=tabs.length;x<l;x++)
+    //get stats
+    var numStatTables=document.querySelectorAll(".tabbernav")[1].querySelectorAll("li").length;
+
+    var maxStats;
+    var currentStats;
+    for (var x=0;x<numStatTables;x++)
     {
-        if (tabs[x].innerText=="Remodel")
+        currentStats=extractStats(tables[tableIndexes.stats+x],res.class);
+
+        if (!maxStats || currentStats.hp>maxStats.hp)
         {
-            res.remodel=1;
-            tableIndexes.stats-=1;
+            maxStats=currentStats;
         }
     }
 
-    var remodeloffset=0;
-    if (tables[tableIndexes.equipment].firstElementChild.innerText!="Equipment")
-    {
-        remodeloffset=1;
-    }
+    res.scaling=maxStats.scaling;
+    res.stats=maxStats.stats;
+
+    tableIndexes.equipment=tableIndexes.stats+numStatTables;
+    tableIndexes.skills=tableIndexes.equipment+1;
 
     //grabbing skills
-    var skilltablerows=tables[tableIndexes.skills+remodeloffset].children;
+    var skilltablerows=tables[tableIndexes.skills].children;
     var skills=[];
     var skillcolour;
     for (var x=1;x<skilltablerows.length;x++)
@@ -92,12 +95,6 @@
     }
 
     res.skills=skills;
-
-    //get stats
-    res.stats=extractStats(tables[tableIndexes.stats],res.class);
-
-    res.scaling=res.stats.scaling;
-    res.stats=res.stats.stats;
 
     //if scalings werent on the first page of stats, try the second (rare case)
     //of course, only take the scalings
@@ -127,7 +124,7 @@
     }
 
     //grab equipment
-    var equiptable=tables[tableIndexes.equipment+remodeloffset].children;
+    var equiptable=tables[tableIndexes.equipment].children;
     res.equipment=[];
     res.equipment.push(equipTexttoNum(equiptable[2].children[2].innerText));
     res.equipment.push(equipTexttoNum(equiptable[3].children[2].innerText));
@@ -313,7 +310,7 @@ function classConvert(shipclass)
     }
 }
 
-//give it the root element table of stats
+//give it the root element of a table of stats
 function extractStats(stattablerows,sclass="")
 {
     stattablerows=stattablerows.children;
