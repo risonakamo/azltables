@@ -31,14 +31,18 @@
     var doc=document;
     var res={};
     var tables=doc.querySelectorAll(".wikitable>tbody");
+    console.log(tables);
 
     //input the index of the table related to the corresponding key. whatever that means???
     var tableIndexes={
         countryClass:1,
         rarity:0,
         stats:3 //number for first table of stats
-        // equipment:6, needs to be recalulated after detecting number of stat tables
-        // skills:7
+
+        //these need to be recalulated
+        //after detecting number of stat tables:
+        // equipment:?
+        // skills:?
     };
 
     if (!tables)
@@ -54,81 +58,15 @@
     res.link=window.location.href;
 
     //get stats
-    var numStatTables=document.querySelectorAll(".tabbernav")[1].querySelectorAll("li").length;
-
-    var maxStats;
-    var currentStats;
-    for (var x=0;x<numStatTables;x++)
-    {
-        currentStats=extractStats(tables[tableIndexes.stats+x],res.class);
-
-        if (!maxStats || currentStats.hp>maxStats.hp)
-        {
-            maxStats=currentStats;
-        }
-    }
-
-    res.scaling=maxStats.scaling;
-    res.stats=maxStats.stats;
-
-    tableIndexes.equipment=tableIndexes.stats+numStatTables;
-    tableIndexes.skills=tableIndexes.equipment+1;
+    getStats(tables,res,tableIndexes);
 
     //grabbing skills
-    var skilltablerows=tables[tableIndexes.skills].children;
-    var skills=[];
-    var skillcolour;
-    for (var x=1;x<skilltablerows.length;x++)
-    {
-        skillcolour=skilltablerows[x].children[2].style.backgroundColor;
-
-        if (!skillcolour || skillcolour=="none" || skillcolour=="None")
-        {
-            break;
-        }
-
-        skills.push({
-            name:skilltablerows[x].children[2].innerText,
-            description:skilltablerows[x].children[3].innerText,
-            colour:convertSkillColour(skillcolour)
-        });
-    }
-
-    res.skills=skills;
-
-    //if scalings werent on the first page of stats, try the second (rare case)
-    //of course, only take the scalings
-    if (!res.scaling.hp)
-    {
-        console.log("scalings missing on first tab");
-        res.scaling=extractStats(tables[tableIndexes.stats+1]).scaling;
-    }
-
-    //work around for rare armour 0 case
-    if (res.stats.armour=="err")
-    {
-        res.stats.armour=armourConvert(tables[tableIndexes.stats+1].children[0].children[1].innerText);
-    }
-
-    //check torpedo capable
-    if (parseInt(res.stats.torpedo))
-    {
-        res.torpedoAble=1;
-    }
-
-    //check if antiair dd
-    if (res.class=="DD" &&
-        (res.scaling.antiair=="C" || res.scaling.antiair=="B" || res.scaling.antiair=="A"))
-    {
-        res.antiairDD=1;
-    }
+    getSkills(tables,res,tableIndexes);
 
     //grab equipment
-    var equiptable=tables[tableIndexes.equipment].children;
-    res.equipment=[];
-    res.equipment.push(equipTexttoNum(equiptable[2].children[2].innerText));
-    res.equipment.push(equipTexttoNum(equiptable[3].children[2].innerText));
-    res.equipment.push(equipTexttoNum(equiptable[4].children[2].innerText));
+    getEquips(tables,res,tableIndexes);
+
+    getAdditional(tables,res,tableIndexes);
 
     console.log(res);
     return res;
@@ -249,6 +187,7 @@ function countryConvert(country)
     switch (country)
     {
         case "Metalblood":
+        case "Ironblood":
         return "de";
 
         case "Royal Navy":
@@ -395,4 +334,92 @@ function armourConvert(armour)
     }
 
     return "err";
+}
+
+function getStats(tables,res,tableIndexes)
+{
+    var numStatTables=document.querySelectorAll(".tabbernav")[1].querySelectorAll("li").length;
+    console.log(numStatTables);
+
+    var maxStats;
+    var currentStats;
+    for (var x=0;x<numStatTables;x++)
+    {
+        currentStats=extractStats(tables[tableIndexes.stats+x],res.class);
+
+        if (currentStats.stats.hp!="" && (!maxStats || parseInt(currentStats.stats.hp)>parseInt(maxStats.stats.hp)))
+        {
+            maxStats=currentStats;
+        }
+    }
+
+    res.scaling=maxStats.scaling;
+    res.stats=maxStats.stats;
+
+    //calculate equipment and skill table index based on number of stat tables found
+    tableIndexes.equipment=tableIndexes.stats+numStatTables;
+    tableIndexes.skills=tableIndexes.equipment+1;
+}
+
+function getEquips(tables,res,tableIndexes)
+{
+    var equiptable=tables[tableIndexes.equipment].children;
+    res.equipment=[];
+    res.equipment.push(equipTexttoNum(equiptable[2].children[2].innerText));
+    res.equipment.push(equipTexttoNum(equiptable[3].children[2].innerText));
+    res.equipment.push(equipTexttoNum(equiptable[4].children[2].innerText));
+}
+
+function getSkills(tables,res,tableIndexes)
+{
+    var skilltablerows=tables[tableIndexes.skills].children;
+    var skills=[];
+    var skillcolour;
+    for (var x=1;x<skilltablerows.length;x++)
+    {
+        skillcolour=skilltablerows[x].children[2].style.backgroundColor;
+
+        if (!skillcolour || skillcolour=="none" || skillcolour=="None")
+        {
+            break;
+        }
+
+        skills.push({
+            name:skilltablerows[x].children[2].innerText,
+            description:skilltablerows[x].children[3].innerText,
+            colour:convertSkillColour(skillcolour)
+        });
+    }
+
+    res.skills=skills;
+}
+
+function getAdditional(tables,res,tableIndexes)
+{
+    //if scalings werent on the first page of stats, try the second (rare case)
+    //of course, only take the scalings
+    if (!res.scaling.hp)
+    {
+        console.log("scalings missing on first tab");
+        res.scaling=extractStats(tables[tableIndexes.stats+1]).scaling;
+    }
+
+    //work around for rare armour 0 case
+    if (res.stats.armour=="err")
+    {
+        res.stats.armour=armourConvert(tables[tableIndexes.stats+1].children[0].children[1].innerText);
+    }
+
+    //check torpedo capable
+    if (parseInt(res.stats.torpedo))
+    {
+        res.torpedoAble=1;
+    }
+
+    //check if antiair dd
+    if (res.class=="DD" &&
+        (res.scaling.antiair=="C" || res.scaling.antiair=="B" || res.scaling.antiair=="A"))
+    {
+        res.antiairDD=1;
+    }
 }
