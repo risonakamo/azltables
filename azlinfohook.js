@@ -186,6 +186,9 @@ function countryConvert(country)
 {
     switch (country)
     {
+        case "Sakura Empire":
+        return "jp";
+
         case "Metalblood":
         case "Ironblood":
         return "de";
@@ -193,11 +196,14 @@ function countryConvert(country)
         case "Royal Navy":
         return "en";
 
-        case "Sakura Empire":
-        return "jp";
-
         case "Eagle Union":
         return "us";
+
+        case "Iris Libre":
+        return "fr";
+
+        case "Vichya Dominion":
+        return "vfr";
 
         case "Neptunia":
         return "nep";
