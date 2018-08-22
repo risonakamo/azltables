@@ -22,6 +22,15 @@ function main()
                 continue;
             }
 
+            currentClassShips.sort((a,b)=>{
+                if (a.name.toLowerCase()>b.name.toLowerCase())
+                {
+                    return 1;
+                }
+
+                return -1;
+            });
+
             for (var y=0;y<currentClassShips.length;y++)
             {
                 // ftables.insertAdjacentHTML("beforeend",genShipTable(currentClassShips[y]));
