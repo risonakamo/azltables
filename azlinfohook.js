@@ -68,6 +68,8 @@
 
     getAdditional(tables,res,tableIndexes);
 
+    checkKai(res);
+
     console.log(res);
     return res;
 })()
@@ -345,7 +347,7 @@ function armourConvert(armour)
 function getStats(tables,res,tableIndexes)
 {
     var numStatTables=document.querySelectorAll(".tabbernav")[1].querySelectorAll("li").length;
-    console.log(numStatTables);
+    // console.log(numStatTables);
 
     var maxStats;
     var currentStats;
@@ -427,5 +429,19 @@ function getAdditional(tables,res,tableIndexes)
         (res.scaling.antiair=="C" || res.scaling.antiair=="B" || res.scaling.antiair=="A"))
     {
         res.antiairDD=1;
+    }
+}
+
+//detect if remodel. sets remodel on given res object
+function checkKai(res)
+{
+    var tabbernavs=document.querySelectorAll(".tabbernav li");
+    for (var x=0,l=tabbernavs.length;x<l;x++)
+    {
+        if (tabbernavs[x].innerText=="Retrofit")
+        {
+            res.remodel=1;
+            return;
+        }
     }
 }
