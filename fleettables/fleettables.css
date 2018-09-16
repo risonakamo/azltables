@@ -5,6 +5,14 @@ body
     margin: 0;
 }
 
+.ftables
+{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+}
+
 /*-- menu --*/
 .menu-hover-button
 {
