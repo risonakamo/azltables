@@ -20,6 +20,13 @@ function main()
                 document.querySelector(".buttons").classList.remove("hidden");
             });
         }
+
+        else
+        {
+            chrome.tabs.create({
+                url:"fleettables/fleettables.html"
+            });
+        }
     });
 }
 
