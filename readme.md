@@ -1,3 +1,6 @@
+[![GitHub release](https://img.shields.io/github/release/risonakamo/azltables.svg)](https://github.com/risonakamo/azltables/releases)
+![GitHub manifest version](https://img.shields.io/github/manifest-json/v/risonakamo/azltables.svg)
+
 ## azurlane tables
 im not sure if you can really call these tables though
 ![](https://i.imgur.com/00kEP4D.png)
