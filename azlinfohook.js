@@ -212,6 +212,12 @@ function countryConvert(country)
 
         case "Eastern Radiance":
         return "cn";
+
+        case "North Union":
+        return "ru";
+
+        case "Utawarerumono":
+        return "uta";
     }
 
     return "missing";
