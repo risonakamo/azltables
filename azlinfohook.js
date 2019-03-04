@@ -27,7 +27,8 @@
     }
 */
 
-(()=>{
+function main()
+{
     var doc=document;
     var res={};
     var tables=doc.querySelectorAll(".wikitable>tbody");
@@ -59,6 +60,9 @@
 
     //get stats
     getStats(tables,res,tableIndexes);
+    var statScales=getStatsScalings2();
+    res.stats=statScales.stats;
+    res.scaling=statScales.scaling;
 
     //grabbing skills
     getSkills(tables,res,tableIndexes);
@@ -72,7 +76,7 @@
 
     console.log(res);
     return res;
-})()
+}
 
 //convert equipment string to number of equipment used for
 //equipment images
@@ -358,6 +362,7 @@ function getStats(tables,res,tableIndexes)
     var numStatTables=document.querySelectorAll(".tabbernav")[1].querySelectorAll("li").length;
     // console.log(numStatTables);
 
+    /* let new stat grabber handle this part
     var maxStats;
     var currentStats;
     for (var x=0;x<numStatTables;x++)
@@ -372,6 +377,7 @@ function getStats(tables,res,tableIndexes)
 
     res.scaling=maxStats.scaling;
     res.stats=maxStats.stats;
+    */
 
     //calculate equipment and skill table index based on number of stat tables found
     tableIndexes.equipment=tableIndexes.stats+numStatTables;
@@ -491,7 +497,7 @@ function getStatsScalings2()
 
             if (statOrder[y]=="armour")
             {
-                res[stat]=cell;
+                res[stat]=armourConvert(cell);
                 continue;
             }
 
@@ -517,5 +523,7 @@ function getStatsScalings2()
         }
     }
 
-    return {stats:res,scalings:resScales};
+    return {stats:res,scaling:resScales};
 }
+
+main();
