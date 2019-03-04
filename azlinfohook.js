@@ -60,7 +60,7 @@ function main()
 
     //get stats
     getStats(tables,res,tableIndexes);
-    var statScales=getStatsScalings2();
+    var statScales=getStatsScalings2(res.class);
     res.stats=statScales.stats;
     res.scaling=statScales.scaling;
 
@@ -461,18 +461,27 @@ function checkKai(res)
     }
 }
 
-const statOrder=["hp","armour","reload","gun","torpedo",
+var statOrderNormal=["hp","armour","reload","gun","torpedo",
     "dodge","antiair","planes","gas","asw","speed"];
 
-const statCellLength=13; //the correct number of stat cells in a full stat table
+var statOrderSub=["hp","armour","reload","gun","torpedo",
+    "dodge","antiair","planes","gas","oxy","ammo","speed"];
+
+var statCellLength=13; //the correct number of stat cells in a full stat table
 
 //grab stats and scalings and return object with stats and scalings
 //configure with above global variables
-function getStatsScalings2()
+function getStatsScalings2(shipClass)
 {
     var statTables=document.querySelectorAll(".tabber")[1].querySelectorAll("tbody");
 
     var statCells; //the current stat cells going over
+    var statOrder=statOrderNormal;
+
+    if (shipClass=="SS")
+    {
+        statOrder=statOrderSub;
+    }
 
     var cell; //the text of the current statcell
     var stat; //the current stat string text
@@ -486,7 +495,7 @@ function getStatsScalings2()
         statCells=statTables[x].querySelectorAll("td");
 
         //make sure there is the correct number of cells
-        if (statCells.length!=statCellLength)
+        if (statCells.length!=statCellLength && shipClass!="SS")
         {
             console.warn(`stats table cell count error: ${statCells.length} cells instead of ${statCellLength}`);
             continue;
