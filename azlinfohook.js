@@ -461,9 +461,13 @@ function checkKai(res)
     }
 }
 
-var statOrder=["hp","armour","reload","gun","torpedo",
+const statOrder=["hp","armour","reload","gun","torpedo",
     "dodge","antiair","planes","gas","asw","speed"];
 
+const statCellLength=13; //the correct number of stat cells in a full stat table
+
+//grab stats and scalings and return object with stats and scalings
+//configure with above global variables
 function getStatsScalings2()
 {
     var statTables=document.querySelectorAll(".tabber")[1].querySelectorAll("tbody");
@@ -482,15 +486,15 @@ function getStatsScalings2()
         statCells=statTables[x].querySelectorAll("td");
 
         //make sure there is the correct number of cells
-        if (statCells.length!=13)
+        if (statCells.length!=statCellLength)
         {
-            console.warn(`stats table cell count error: ${statCells.length} cells instead of 13`);
+            console.warn(`stats table cell count error: ${statCells.length} cells instead of ${statCellLength}`);
             continue;
         }
 
         //loop over all cells and statOrder at same time
         //statOrder should be the order cell stats appear in
-        for (var y=0;y<=10;y++)
+        for (var y=0,ly=statOrder.length;y<=ly;y++)
         {
             stat=statOrder[y];
             cell=statCells[y].innerText.trim();
