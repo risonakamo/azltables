@@ -454,3 +454,68 @@ function checkKai(res)
         }
     }
 }
+
+var statOrder=["hp","armour","reload","gun","torpedo",
+    "dodge","antiair","planes","gas","asw","speed"];
+
+function getStatsScalings2()
+{
+    var statTables=document.querySelectorAll(".tabber")[1].querySelectorAll("tbody");
+
+    var statCells; //the current stat cells going over
+
+    var cell; //the text of the current statcell
+    var stat; //the current stat string text
+    var statCellSplit; //the text of the current cell, split into stat and scaling
+
+    var res={};
+    var resScales={};
+    for (var x=0,l=statTables.length;x<l;x++)
+    {
+        //get all cells for each table of stats
+        statCells=statTables[x].querySelectorAll("td");
+
+        //make sure there is the correct number of cells
+        if (statCells.length!=13)
+        {
+            console.warn(`stats table cell count error: ${statCells.length} cells instead of 13`);
+            continue;
+        }
+
+        //loop over all cells and statOrder at same time
+        //statOrder should be the order cell stats appear in
+        for (var y=0;y<=10;y++)
+        {
+            stat=statOrder[y];
+            cell=statCells[y].innerText.trim();
+
+            if (statOrder[y]=="armour")
+            {
+                res[stat]=cell;
+                continue;
+            }
+
+            statCellSplit=[cell.match(/\d+/),cell.match(/[A-Z]/)]; //[stat value,scaling value]
+
+            if (statCellSplit[0])
+            {
+                statCellSplit[0]=parseInt(statCellSplit[0]);
+                if (!res[stat] || statCellSplit[0]>res[stat])
+                {
+                    res[stat]=statCellSplit[0];
+                }
+            }
+
+            if (statCellSplit[1])
+            {
+                statCellSplit[1]=statCellSplit[1][0];
+                if (!resScales[stat] || statCellSplit[1]<resScales[stat])
+                {
+                    resScales[stat]=statCellSplit[1];
+                }
+            }
+        }
+    }
+
+    return {stats:res,scalings:resScales};
+}
