@@ -32,7 +32,7 @@ function main()
     var doc=document;
     var res={};
     var tables=doc.querySelectorAll(".wikitable>tbody");
-    console.log(tables);
+    // console.log(tables);
 
     //input the index of the table related to the corresponding key. whatever that means???
     var tableIndexes={
@@ -465,7 +465,7 @@ var statOrderNormal=["hp","armour","reload","gun","torpedo",
     "dodge","antiair","planes","gas","asw","speed"];
 
 var statOrderSub=["hp","armour","reload","gun","torpedo",
-    "dodge","antiair","planes","gas","oxy","ammo","speed"];
+    "dodge","antiair","planes","gas","oxy","ammo"];
 
 var statCellLength=13; //the correct number of stat cells in a full stat table
 
@@ -505,17 +505,20 @@ function getStatsScalings2(shipClass)
         //statOrder should be the order cell stats appear in
         for (var y=0,ly=statOrder.length;y<=ly;y++)
         {
-            stat=statOrder[y];
-            cell=statCells[y].innerText.trim();
+            stat=statOrder[y]; //string that is the current stat, from stat order, which we are looping over
+            cell=statCells[y].innerText.trim(); //the text in the current cell which we are also looping over at the same tiem
 
-            if (statOrder[y]=="armour")
+            //if the current stat being set is armour, do this specific stuff
+            if (statOrder[y]=="armour" && !res.armour && cell)
             {
-                res[stat]=armourConvert(cell);
+                res.armour=armourConvert(cell);
                 continue;
             }
 
+            //handle the value for possible scalings
             statCellSplit=[cell.match(/\d+/),cell.match(/[A-Z]/)]; //[stat value,scaling value]
 
+            //if there is a stat number, set it if it is higher that the one currently in the result stats
             if (statCellSplit[0])
             {
                 statCellSplit[0]=parseInt(statCellSplit[0]);
@@ -525,12 +528,29 @@ function getStatsScalings2(shipClass)
                 }
             }
 
+            //set a scaling, if it is better than one already set
             if (statCellSplit[1])
             {
                 statCellSplit[1]=statCellSplit[1][0];
                 if (!resScales[stat] || statCellSplit[1]<resScales[stat])
                 {
                     resScales[stat]=statCellSplit[1];
+                }
+            }
+        }
+
+        //if ship is a sub, speed stat should be the third from the end
+        if (shipClass=="SS")
+        {
+            var speedtext=statCells[statCells.length-3].innerText;
+
+            if (speedtext)
+            {
+                speedtext=parseInt(speedtext);
+
+                if (speedtext>res.speed || !res.speed)
+                {
+                    res.speed=speedtext;
                 }
             }
         }
