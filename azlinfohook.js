@@ -571,10 +571,9 @@ function processCell(cell)
 {
     if (cell.firstChild && cell.firstChild.nodeName=="IMG")
     {
-        var statText=cell.firstChild.alt;
         var res={};
 
-        switch (statText)
+        switch (cell.firstChild.alt)
         {
             case "Health":
             res.stat="hp";
@@ -612,12 +611,37 @@ function processCell(cell)
             res.stat="gas";
             break;
 
+            case "Anti-Submarine Warfare":
+            res.stat="asw";
+            break;
+
             case "Oxygen":
             res.stat="oxy";
             break;
 
             case "Amount of Ammunition":
             res.stat="ammo";
+            break;
+
+            default:
+            return null;
+        }
+
+        res.value=cell.innerText.trim();
+    }
+
+    else if (cell.previousElementSibling && cell.previousElementSibling.nodeName=="TH")
+    {
+        var res={};
+
+        switch (cell.previousElementSibling.innerText.trim())
+        {
+            case "Speed":
+            res.stat="speed";
+            break;
+
+            case "Luck":
+            res.stat="luck";
             break;
 
             default:
