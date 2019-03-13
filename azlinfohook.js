@@ -507,6 +507,7 @@ function getStatsScalings2(shipClass)
         {
             stat=statOrder[y]; //string that is the current stat, from stat order, which we are looping over
             cell=statCells[y].innerText.trim(); //the text in the current cell which we are also looping over at the same tiem
+            console.log(processCell(statCells[y]));
 
             //if the current stat being set is armour, do this specific stuff
             if (statOrder[y]=="armour" && !res.armour && cell)
@@ -557,6 +558,76 @@ function getStatsScalings2(shipClass)
     }
 
     return {stats:res,scaling:resScales};
+}
+
+/*given a cell element, return an object:
+  {
+    value:the stat text, without additional parsing (so the scaling might still be there),
+    stat:text of the stat that should be set inside of the
+         final stats object
+  }, for example:
+  {value:500,stat:"torpedo"}*/
+function processCell(cell)
+{
+    if (cell.firstChild && cell.firstChild.nodeName=="IMG")
+    {
+        var statText=cell.firstChild.alt;
+        var res={};
+
+        switch (statText)
+        {
+            case "Health":
+            res.stat="hp";
+            break;
+
+            case "Armor type":
+            res.stat="armour";
+            break;
+
+            case "Reload":
+            res.stat="reload";
+            break;
+
+            case "Firepower":
+            res.stat="gun";
+            break;
+
+            case "Torpedo":
+            res.stat="torpedo";
+            break;
+
+            case "Evasion":
+            res.stat="dodge";
+            break;
+
+            case "Anti-Air":
+            res.stat="antiair";
+            break;
+
+            case "Air Power":
+            res.stat="planes";
+            break;
+
+            case "Oil consumption":
+            res.stat="gas";
+            break;
+
+            case "Oxygen":
+            res.stat="oxy";
+            break;
+
+            case "Amount of Ammunition":
+            res.stat="ammo";
+            break;
+
+            default:
+            return null;
+        }
+
+        res.value=cell.innerText.trim();
+    }
+
+    return res;
 }
 
 main();
