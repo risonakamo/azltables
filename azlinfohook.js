@@ -495,7 +495,7 @@ function getStatsScalings2(shipClass)
         statCells=statTables[x].querySelectorAll("td");
 
         //make sure there is the correct number of cells
-        if (statCells.length!=statCellLength && shipClass!="SS")
+        if (statCells.length<statCellLength && shipClass!="SS")
         {
             console.warn(`stats table cell count error: ${statCells.length} cells instead of ${statCellLength}`);
             continue;
