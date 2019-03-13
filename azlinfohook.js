@@ -476,41 +476,34 @@ function getStatsScalings2(shipClass)
     var statTables=document.querySelectorAll(".tabber")[1].querySelectorAll("tbody");
 
     var statCells; //the current stat cells going over
-    var statOrder=statOrderNormal;
-
-    if (shipClass=="SS")
-    {
-        statOrder=statOrderSub;
-    }
 
     var cell; //the text of the current statcell
     var stat; //the current stat string text
     var statCellSplit; //the text of the current cell, split into stat and scaling
 
-    var res={};
+    var res={asw:0};
     var resScales={};
     for (var x=0,l=statTables.length;x<l;x++)
     {
         //get all cells for each table of stats
         statCells=statTables[x].querySelectorAll("td");
 
-        //make sure there is the correct number of cells
-        if (statCells.length<statCellLength && shipClass!="SS")
-        {
-            console.warn(`stats table cell count error: ${statCells.length} cells instead of ${statCellLength}`);
-            continue;
-        }
-
         //loop over all cells and statOrder at same time
         //statOrder should be the order cell stats appear in
-        for (var y=0,ly=statOrder.length;y<=ly;y++)
+        for (var y=0,ly=statCells.length;y<=ly;y++)
         {
-            stat=statOrder[y]; //string that is the current stat, from stat order, which we are looping over
-            cell=statCells[y].innerText.trim(); //the text in the current cell which we are also looping over at the same tiem
-            console.log(processCell(statCells[y]));
+            cell=processCell(statCells[y]);
+
+            if (!cell)
+            {
+                continue;
+            }
+
+            stat=cell.stat; //set to the stat name that we are possibly about to update in res
+            cell=cell.value; //set to the text in the current cell
 
             //if the current stat being set is armour, do this specific stuff
-            if (statOrder[y]=="armour" && !res.armour && cell)
+            if (stat=="armour" && !res.armour && cell)
             {
                 res.armour=armourConvert(cell);
                 continue;
@@ -539,22 +532,6 @@ function getStatsScalings2(shipClass)
                 }
             }
         }
-
-        //if ship is a sub, speed stat should be the third from the end
-        if (shipClass=="SS")
-        {
-            var speedtext=statCells[statCells.length-3].innerText;
-
-            if (speedtext)
-            {
-                speedtext=parseInt(speedtext);
-
-                if (speedtext>res.speed || !res.speed)
-                {
-                    res.speed=speedtext;
-                }
-            }
-        }
     }
 
     return {stats:res,scaling:resScales};
@@ -569,11 +546,16 @@ function getStatsScalings2(shipClass)
   {value:500,stat:"torpedo"}*/
 function processCell(cell)
 {
+    if (!cell)
+    {
+        return;
+    }
+
     if (cell.firstChild && cell.firstChild.nodeName=="IMG")
     {
         var res={};
 
-        switch (cell.firstChild.alt)
+        switch (cell.firstChild.alt.replace(/\s/g," "))
         {
             case "Health":
             res.stat="hp";
