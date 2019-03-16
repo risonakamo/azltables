@@ -492,7 +492,7 @@ function getStatsScalings2(shipClass)
         //statOrder should be the order cell stats appear in
         for (var y=0,ly=statCells.length;y<=ly;y++)
         {
-            cell=processCell(statCells[y]);
+            cell=processCell2(statCells[y]);
 
             if (!cell)
             {
@@ -634,6 +634,99 @@ function processCell(cell)
     }
 
     return res;
+}
+
+//new version after wiki changed up cell formatting
+function processCell2(cell)
+{
+    if (!cell)
+    {
+        return;
+    }
+
+    var res={};
+
+    if (cell.previousElementSibling &&
+        cell.previousElementSibling.firstElementChild &&
+        cell.previousElementSibling.firstElementChild.nodeName=="IMG")
+    {
+        switch (cell.previousElementSibling.firstElementChild.alt.replace(/\s/g," "))
+        {
+            case "Health":
+            res.stat="hp";
+            break;
+
+            case "Armor type":
+            res.stat="armour";
+            break;
+
+            case "Reload":
+            res.stat="reload";
+            break;
+
+            case "Firepower":
+            res.stat="gun";
+            break;
+
+            case "Torpedo":
+            res.stat="torpedo";
+            break;
+
+            case "Evasion":
+            res.stat="dodge";
+            break;
+
+            case "Anti-Air":
+            res.stat="antiair";
+            break;
+
+            case "Air Power":
+            res.stat="planes";
+            break;
+
+            case "Oil consumption":
+            res.stat="gas";
+            break;
+
+            case "Anti-Submarine Warfare":
+            res.stat="asw";
+            break;
+
+            case "Oxygen":
+            res.stat="oxy";
+            break;
+
+            case "Amount of Ammunition":
+            res.stat="ammo";
+            break;
+
+            default:
+            return null;
+        }
+
+        res.value=cell.innerText.trim();
+        return res;
+    }
+
+    else if (cell.previousElementSibling && cell.previousElementSibling.nodeName=="TH")
+    {
+        switch (cell.previousElementSibling.innerText.trim())
+        {
+            case "Spd":
+            res.stat="speed";
+            break;
+
+            case "Lck":
+            res.stat="speed";
+            break;
+
+            default:
+            return null;
+        }
+
+        res.value=cell.innerText.trim();
+        return res;
+    }
 }
 
 main();
