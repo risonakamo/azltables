@@ -34,6 +34,6 @@ im not sure if you can really call these tables though
 ![](https://i.imgur.com/RHJX7Q7.png)
 
 ### why are sub torpedoes green?
-someone was wondering. the colour comes from I-58, everyone's first sub. the sub class green colour comes from I-58 too.
+sub colours from I-58
 
 ![](https://i.imgur.com/NcNDHBt.png)
