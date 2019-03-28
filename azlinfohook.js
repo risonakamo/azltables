@@ -656,7 +656,7 @@ function processCell2(cell)
             res.stat="hp";
             break;
 
-            case "Armor type":
+            case "Armor":
             res.stat="armour";
             break;
 
@@ -680,11 +680,11 @@ function processCell2(cell)
             res.stat="antiair";
             break;
 
-            case "Air Power":
+            case "Aviation":
             res.stat="planes";
             break;
 
-            case "Oil consumption":
+            case "Oil Consumption":
             res.stat="gas";
             break;
 
