@@ -38,7 +38,7 @@ function main()
     var tableIndexes={
         countryClass:1,
         rarity:0,
-        stats:3 //number for first table of stats
+        stats:4 //number for first table of stats
 
         //these need to be recalulated
         //after detecting number of stat tables:
@@ -555,6 +555,8 @@ function processCell(cell)
     {
         var res={};
 
+        console.log(cell.firstChild.alt);
+
         switch (cell.firstChild.alt.replace(/\s/g," "))
         {
             case "Health":
@@ -605,6 +607,10 @@ function processCell(cell)
             res.stat="ammo";
             break;
 
+            case "Luck":
+            res.stat="luck";
+            break;
+
             default:
             return null;
         }
@@ -620,10 +626,6 @@ function processCell(cell)
         {
             case "Speed":
             res.stat="speed";
-            break;
-
-            case "Luck":
-            res.stat="luck";
             break;
 
             default:
@@ -700,6 +702,10 @@ function processCell2(cell)
             res.stat="ammo";
             break;
 
+            case "Luck":
+            res.stat="luck";
+            break;
+
             default:
             return null;
         }
@@ -713,10 +719,6 @@ function processCell2(cell)
         switch (cell.previousElementSibling.innerText.trim())
         {
             case "Spd":
-            res.stat="speed";
-            break;
-
-            case "Lck":
             res.stat="speed";
             break;
 
