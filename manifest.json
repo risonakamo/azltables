@@ -1,7 +1,7 @@
 {
     "manifest_version":2,
     "name":"azltables",
-    "version":"1.11.1",
+    "version":"1.11.2",
     "description":"save information from english azurlane wiki",
     "homepage_url":"https://github.com/risonakamo/azltables",
 
