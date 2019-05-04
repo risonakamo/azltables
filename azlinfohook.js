@@ -126,10 +126,15 @@ function equipTexttoNum(text)
         return 11;
 
         case "CL Main Guns (CA Main Guns on retrofit)":
+        case "CL Main Guns (CA on retrofit)":
+        case "CL/CA Main Guns":
         return 13;
 
         case "Submarine Torpedoes":
         return 14;
+
+        case "Dive Bomber/CL Main Guns":
+        return 15;
     }
 
     return 12;
