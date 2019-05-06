@@ -38,7 +38,7 @@ function main()
     var tableIndexes={
         countryClass:1,
         rarity:0,
-        stats:4 //number for first table of stats
+        stats:5 //number for first table of stats
 
         //these need to be recalulated
         //after detecting number of stat tables:
@@ -46,6 +46,7 @@ function main()
         // skills:?
     };
 
+    console.log(tables);
     if (!tables)
     {
         return 0;
