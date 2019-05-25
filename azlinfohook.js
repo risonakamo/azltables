@@ -38,7 +38,7 @@ function main()
     var tableIndexes={
         countryClass:1,
         rarity:0,
-        stats:5 //number for first table of stats
+        stats:3 //number for first table of stats
 
         //these need to be recalulated
         //after detecting number of stat tables:
@@ -86,15 +86,19 @@ function equipTexttoNum(text)
     switch (text)
     {
         case "DD Main Guns":
+        case "DD Guns":
         return 0;
 
         case "CA Main Guns":
+        case "CA Guns":
         return 1;
 
         case "BB Main Guns":
+        case "BB Guns":
         return 2;
 
         case "CL Main Guns":
+        case "CL Guns":
         return 3;
 
         case "Torpedoes":
@@ -124,11 +128,14 @@ function equipTexttoNum(text)
         case "DD/CL Main Guns":
         case "CL/DD Main Guns":
         case "CL Guns, DD guns":
+        case "DD/CL Guns":
         return 11;
 
         case "CL Main Guns (CA Main Guns on retrofit)":
+        case "CL Guns (CA Guns on retrofit)":
         case "CL Main Guns (CA on retrofit)":
         case "CL/CA Main Guns":
+        case "CL/CA Guns":
         return 13;
 
         case "Submarine Torpedoes":
