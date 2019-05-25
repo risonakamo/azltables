@@ -142,6 +142,7 @@ function equipTexttoNum(text)
         return 14;
 
         case "Dive Bomber/CL Main Guns":
+        case "Dive Bomber / CL Guns":
         return 15;
     }
 
