@@ -433,19 +433,19 @@ function getSkills(tables,res,tableIndexes)
 
 function getAdditional(tables,res,tableIndexes)
 {
-    //if scalings werent on the first page of stats, try the second (rare case)
-    //of course, only take the scalings
-    if (!res.scaling.hp)
-    {
-        console.log("scalings missing on first tab");
-        res.scaling=extractStats(tables[tableIndexes.stats+1]).scaling;
-    }
+    // //if scalings werent on the first page of stats, try the second (rare case)
+    // //of course, only take the scalings
+    // if (!res.scaling.hp)
+    // {
+    //     console.log("scalings missing on first tab");
+    //     res.scaling=extractStats(tables[tableIndexes.stats+1]).scaling;
+    // }
 
-    //work around for rare armour 0 case
-    if (res.stats.armour=="err")
-    {
-        res.stats.armour=armourConvert(tables[tableIndexes.stats+1].children[0].children[1].innerText);
-    }
+    // //work around for rare armour 0 case
+    // if (res.stats.armour=="err")
+    // {
+    //     res.stats.armour=armourConvert(tables[tableIndexes.stats+1].children[0].children[1].innerText);
+    // }
 
     //check torpedo capable
     if (parseInt(res.stats.torpedo))
@@ -551,106 +551,106 @@ function getStatsScalings2(shipClass)
     return {stats:res,scaling:resScales};
 }
 
-/*given a cell element, return an object:
-  {
-    value:the stat text, without additional parsing (so the scaling might still be there),
-    stat:text of the stat that should be set inside of the
-         final stats object
-  }, for example:
-  {value:500,stat:"torpedo"}*/
-function processCell(cell)
-{
-    if (!cell)
-    {
-        return;
-    }
+// /*given a cell element, return an object:
+//   {
+//     value:the stat text, without additional parsing (so the scaling might still be there),
+//     stat:text of the stat that should be set inside of the
+//          final stats object
+//   }, for example:
+//   {value:500,stat:"torpedo"}*/
+// function processCell(cell)
+// {
+//     if (!cell)
+//     {
+//         return;
+//     }
 
-    if (cell.firstChild && cell.firstChild.nodeName=="IMG")
-    {
-        var res={};
+//     if (cell.firstChild && cell.firstChild.nodeName=="IMG")
+//     {
+//         var res={};
 
-        console.log(cell.firstChild.alt);
+//         console.log(cell.firstChild.alt);
 
-        switch (cell.firstChild.alt.replace(/\s/g," "))
-        {
-            case "Health":
-            res.stat="hp";
-            break;
+//         switch (cell.firstChild.alt.replace(/\s/g," "))
+//         {
+//             case "Health":
+//             res.stat="hp";
+//             break;
 
-            case "Armor type":
-            res.stat="armour";
-            break;
+//             case "Armor type":
+//             res.stat="armour";
+//             break;
 
-            case "Reload":
-            res.stat="reload";
-            break;
+//             case "Reload":
+//             res.stat="reload";
+//             break;
 
-            case "Firepower":
-            res.stat="gun";
-            break;
+//             case "Firepower":
+//             res.stat="gun";
+//             break;
 
-            case "Torpedo":
-            res.stat="torpedo";
-            break;
+//             case "Torpedo":
+//             res.stat="torpedo";
+//             break;
 
-            case "Evasion":
-            res.stat="dodge";
-            break;
+//             case "Evasion":
+//             res.stat="dodge";
+//             break;
 
-            case "Anti-Air":
-            res.stat="antiair";
-            break;
+//             case "Anti-air":
+//             res.stat="antiair";
+//             break;
 
-            case "Air Power":
-            res.stat="planes";
-            break;
+//             case "Air Power":
+//             res.stat="planes";
+//             break;
 
-            case "Oil consumption":
-            res.stat="gas";
-            break;
+//             case "Oil consumption":
+//             res.stat="gas";
+//             break;
 
-            case "Anti-Submarine Warfare":
-            res.stat="asw";
-            break;
+//             case "Anti-Submarine Warfare":
+//             res.stat="asw";
+//             break;
 
-            case "Oxygen":
-            res.stat="oxy";
-            break;
+//             case "Oxygen":
+//             res.stat="oxy";
+//             break;
 
-            case "Amount of Ammunition":
-            res.stat="ammo";
-            break;
+//             case "Amount of Ammunition":
+//             res.stat="ammo";
+//             break;
 
-            case "Luck":
-            res.stat="luck";
-            break;
+//             case "Luck":
+//             res.stat="luck";
+//             break;
 
-            default:
-            return null;
-        }
+//             default:
+//             return null;
+//         }
 
-        res.value=cell.innerText.trim();
-    }
+//         res.value=cell.innerText.trim();
+//     }
 
-    else if (cell.previousElementSibling && cell.previousElementSibling.nodeName=="TH")
-    {
-        var res={};
+//     else if (cell.previousElementSibling && cell.previousElementSibling.nodeName=="TH")
+//     {
+//         var res={};
 
-        switch (cell.previousElementSibling.innerText.trim())
-        {
-            case "Speed":
-            res.stat="speed";
-            break;
+//         switch (cell.previousElementSibling.innerText.trim())
+//         {
+//             case "Speed":
+//             res.stat="speed";
+//             break;
 
-            default:
-            return null;
-        }
+//             default:
+//             return null;
+//         }
 
-        res.value=cell.innerText.trim();
-    }
+//         res.value=cell.innerText.trim();
+//     }
 
-    return res;
-}
+//     return res;
+// }
 
 //new version after wiki changed up cell formatting
 function processCell2(cell)
@@ -692,7 +692,7 @@ function processCell2(cell)
             res.stat="dodge";
             break;
 
-            case "Anti-Air":
+            case "Anti-air":
             res.stat="antiair";
             break;
 
@@ -700,11 +700,11 @@ function processCell2(cell)
             res.stat="planes";
             break;
 
-            case "Oil Consumption":
+            case "Oil consumption":
             res.stat="gas";
             break;
 
-            case "Anti-Submarine Warfare":
+            case "Anti-submarine warfare":
             res.stat="asw";
             break;
 
@@ -712,7 +712,7 @@ function processCell2(cell)
             res.stat="oxy";
             break;
 
-            case "Amount of Ammunition":
+            case "Ammunition":
             res.stat="ammo";
             break;
 
