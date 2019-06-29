@@ -129,6 +129,7 @@ function equipTexttoNum(text)
         case "CL/DD Main Guns":
         case "CL Guns, DD guns":
         case "DD/CL Guns":
+        case "CL/DD Guns":
         return 11;
 
         case "CL Main Guns (CA Main Guns on retrofit)":
@@ -395,7 +396,7 @@ function getStats(tables,res,tableIndexes)
 
     //calculate equipment and skill table index based on number of stat tables found
     tableIndexes.equipment=tableIndexes.stats+numStatTables;
-    tableIndexes.skills=tableIndexes.equipment+1;
+    tableIndexes.skills=tableIndexes.equipment+3;
 }
 
 function getEquips(tables,res,tableIndexes)
