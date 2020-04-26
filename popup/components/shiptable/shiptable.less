@@ -109,29 +109,15 @@
         border: 4px solid var(--portrait-border);
     }
 
-    &.purple
-    {
-        --portrait-background: @purplerare-1;
-        --portrait-border: @purplerare-2;
-    }
+    @rarities: purple,gold,blue,grey;
 
-    &.gold
-    {
-        --portrait-background: @goldrare-1;
-        --portrait-border: @goldrare-2;
-    }
-
-    &.blue
-    {
-        --portrait-background: @bluerare-1;
-        --portrait-border: @bluerare-2;
-    }
-
-    &.grey
-    {
-        --portrait-background: @greyrare-1;
-        --portrait-border: @greyrare-2;
-    }
+    each(@rarities,{
+        &.@{value}
+        {
+            --portrait-background: ~"@{@{value}rare-1}";
+            --portrait-border: ~"@{@{value}rare-2}";
+        }
+    });
 }
 
 .class-box
@@ -156,58 +142,19 @@
         margin: 0 2px 0 2px;
     }
 
-    &.CL
-    {
-        background-color: @class-cl;
-    }
+    @class-list: CL,CA,CV,CVL,BB,DD,AR,BM,BC,SS;
+    @class-colours: @class-cl,@class-ca,@class-cv,@class-cvl,@class-bb,@class-dd,@class-ar,
+        @class-bm,@class-bc,@class-ss;
 
-    &.CA
-    {
-        background-color: @class-ca;
-    }
-
-    &.CV
-    {
-        background-color: @class-cv;
-    }
-
-    &.CVL
-    {
-        background-color: @class-cvl;
-    }
-
-    &.BB
-    {
-        background-color: @class-bb;
-    }
-
-    &.DD
-    {
-        background-color: @class-dd;
-    }
-
-    &.AR
-    {
-        background-color: @class-ar;
-    }
-
-    &.BM
-    {
-        background-color: @class-bm;
-    }
-
-    &.BC
-    {
-        background-color: @class-bc;
-    }
+    each(@class-list,{
+        &.@{value}
+        {
+            background-color: extract(@class-colours,@index);
+        }
+    });
 
     &.BBV
     {
         background: @class-bbv;
-    }
-
-    &.SS
-    {
-        background-color: @class-ss;
     }
 }
