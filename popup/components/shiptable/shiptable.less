@@ -1,0 +1,213 @@
+@original-title-beige: #e6dbd6;
+@original-title-black: #635d5a;
+
+// --- rarity colours ---
+@goldrare-1: #deba6b;
+@goldrare-2:  #f7eb84;
+@purplerare-1: #c5b6e6;
+@purplerare-2:  #8c71ce;
+@bluerare-1: #6396b5;
+@bluerare-2:  #8cc6de;
+@greyrare-1: #ced2d6;
+@greyrare-2:  #adaead;
+
+// --- class colours ---
+@class-cl: #deaa31;
+@class-ca: #c57d21;
+@class-cv: #927cf3;
+@class-cvl: #d7c5f2;
+@class-bb: #ff695a;
+@class-dd: #63c2f7;
+@class-ar: #42dead;
+@class-bm: #ab3d47;
+@class-bc: #d94860;
+@class-bbv: linear-gradient(0deg, rgba(146,124,243,1) 50%, rgba(255,105,90,1) 50%);
+@class-ss: #9ed945;
+
+.ship-table
+{
+    display: inline-block;
+    vertical-align: top;
+    width: 660px;
+    margin: 10px;
+    font-size: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 -1px 0 #e0e0e0, 0 0 2px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.24);
+    font-family: "noto",roboto,meiryo,"Segoe UI",Arial;
+
+    a
+    {
+        vertical-align: top;
+        text-decoration: none;
+    }
+
+    div
+    {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .title-box
+    {
+        width: 100%;
+        height: 30px;
+        background-color: @original-title-beige;
+        padding-left: 25px;
+        box-sizing: border-box;
+        overflow: hidden;
+
+        img
+        {
+            height: 50px;
+            margin-top: -10px;
+
+            &.de,&.nep
+            {
+                margin-top: -7px;
+            }
+
+            &.ru
+            {
+                margin-top: -2px;
+            }
+        }
+
+        a
+        {
+            height: 100%;
+            font-size: 25px;
+            color: @original-title-black;
+            margin: 0 10px 0 10px;
+        }
+    }
+
+    .bottom
+    {
+        width: 100%;
+        padding: 5px 10px 5px 10px;
+        box-sizing: border-box;
+    }
+
+    .left
+    {
+        width: 124px;
+    }
+}
+
+.portrait-zone
+{
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    --portrait-background: transparent;
+    --portrait-border: transparent;
+    background-color: var(--portrait-background);
+
+    .portrait
+    {
+        border: 4px solid var(--portrait-border);
+    }
+
+    &.purple
+    {
+        --portrait-background: @purplerare-1;
+        --portrait-border: @purplerare-2;
+    }
+
+    &.gold
+    {
+        --portrait-background: @goldrare-1;
+        --portrait-border: @goldrare-2;
+    }
+
+    &.blue
+    {
+        --portrait-background: @bluerare-1;
+        --portrait-border: @bluerare-2;
+    }
+
+    &.grey
+    {
+        --portrait-background: @greyrare-1;
+        --portrait-border: @greyrare-2;
+    }
+}
+
+.class-box
+{
+    width: 100%;
+    height: 20px;
+    text-align: center;
+    background-color: #313131;
+    line-height: 20px;
+
+    img
+    {
+        height: 16px;
+        margin: 2px 2px 0 2px;
+    }
+
+    .label
+    {
+        height: 20px;
+        font-size: 15px;
+        color: white;
+        margin: 0 2px 0 2px;
+    }
+
+    &.CL
+    {
+        background-color: @class-cl;
+    }
+
+    &.CA
+    {
+        background-color: @class-ca;
+    }
+
+    &.CV
+    {
+        background-color: @class-cv;
+    }
+
+    &.CVL
+    {
+        background-color: @class-cvl;
+    }
+
+    &.BB
+    {
+        background-color: @class-bb;
+    }
+
+    &.DD
+    {
+        background-color: @class-dd;
+    }
+
+    &.AR
+    {
+        background-color: @class-ar;
+    }
+
+    &.BM
+    {
+        background-color: @class-bm;
+    }
+
+    &.BC
+    {
+        background-color: @class-bc;
+    }
+
+    &.BBV
+    {
+        background: @class-bbv;
+    }
+
+    &.SS
+    {
+        background-color: @class-ss;
+    }
+}

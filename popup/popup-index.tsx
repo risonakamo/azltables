@@ -1,10 +1,14 @@
+import ShipTable from "./components/shiptable/shiptable";
+
 import "./popup-index.less";
 
 class PopupIndex extends React.Component
 {
   render()
   {
-    return <div>hi</div>;
+    return <>
+      <ShipTable/>
+    </>;
   }
 }
 
