@@ -1,0 +1,15 @@
+{
+    "compilerOptions":{
+        "jsx":"react",
+        "noImplicitAny":true,
+        "lib":["dom","ESNext"]
+    },
+    "include":[
+        "**/*.ts",
+        "**/*.d.ts",
+        "**/*.tsx"
+    ],
+    "exclude":[
+        "node_modules"
+    ]
+}

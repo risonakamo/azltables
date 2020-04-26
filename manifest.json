@@ -1,20 +1,14 @@
 {
     "manifest_version":2,
-    "name":"azltables",
-    "version":"1.11.6",
+    "name":"Azur Lane Tables 2",
+    "short_name":"azltables2",
+    "version":"2.0.0",
     "description":"save information from english azurlane wiki",
     "homepage_url":"https://github.com/risonakamo/azltables",
 
     "permissions":["tabs","storage","https://azurlane.koumakan.jp/*"],
 
     "browser_action":{
-        "default_popup":"popup/popup.html",
-        "default_icon":"icons/azlicon16.png"
-    },
-
-    "icons":{
-        "16":"icons/azlicon16.png",
-        "48":"icons/azlicon48.png",
-        "128":"icons/azlicon128.png"
+        "default_popup":"popup/popup.html"
     }
 }
