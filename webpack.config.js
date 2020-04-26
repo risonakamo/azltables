@@ -6,7 +6,7 @@ const WebpackBar=require("webpackbar");
 module.exports={
     mode:"development",
     entry:{
-        // popup:"./popup/popup.tsx",
+        popup:"./popup/popup-index.tsx",
     },
     output:{
         path:`${__dirname}/build`,
