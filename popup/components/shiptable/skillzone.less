@@ -1,0 +1,43 @@
+@import (reference) "./shiptable.less";
+
+.skill-zone
+{
+    width: 100%;
+}
+
+.skill-box
+{
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    overflow: hidden;
+
+    &:last-of-type
+    {
+        margin-bottom: 0px;
+    }
+
+    & > div
+    {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .name
+    {
+        height: 18px;
+        background-color: @original-dark-background;
+        color: white;
+        font-size: 13px;
+        padding: 2px 8px 2px 8px;
+    }
+
+    .description
+    {
+        font-size: 14px;
+        color: @original-dark-background;
+        background-color: @original-panel-beige;
+        /* box-shadow: inset 0px 3px 6px 0px rgba(0, 0, 0, 0.35); */
+        padding: 3px 8px 3px 8px;
+    }
+}

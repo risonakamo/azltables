@@ -1,0 +1,65 @@
+@import (reference) "./shiptable.less";
+
+.portrait-zone
+{
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    --portrait-background: transparent;
+    --portrait-border: transparent;
+    background-color: var(--portrait-background);
+
+    .portrait
+    {
+        border: 4px solid var(--portrait-border);
+    }
+
+    @rarities: purple,gold,blue,grey;
+
+    each(@rarities,{
+        &.@{value}
+        {
+            --portrait-background: ~"@{@{value}rare-1}";
+            --portrait-border: ~"@{@{value}rare-2}";
+        }
+    });
+}
+
+.class-box
+{
+    width: 100%;
+    height: 20px;
+    text-align: center;
+    background-color: #313131;
+    line-height: 20px;
+
+    img
+    {
+        height: 16px;
+        margin: 2px 2px 0 2px;
+    }
+
+    .label
+    {
+        height: 20px;
+        font-size: 15px;
+        color: white;
+        margin: 0 2px 0 2px;
+    }
+
+    @class-list: CL,CA,CV,CVL,BB,DD,AR,BM,BC,SS;
+    @class-colours: @class-cl,@class-ca,@class-cv,@class-cvl,@class-bb,@class-dd,@class-ar,
+        @class-bm,@class-bc,@class-ss;
+
+    each(@class-list,{
+        &.@{value}
+        {
+            background-color: extract(@class-colours,@index);
+        }
+    });
+
+    &.BBV
+    {
+        background: @class-bbv;
+    }
+}
