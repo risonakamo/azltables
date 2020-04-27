@@ -23,7 +23,7 @@ export default class ShipTable extends React.Component
         </div>
 
         <div className="right-right">
-          <div class="title-bar">STAT</div>
+          <div className="title-bar">STAT</div>
 
           <StatList/>
         </div>
