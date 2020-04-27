@@ -16,6 +16,16 @@ export default class ShipTable extends React.Component
           <ShipPortrait/>
           <EquipmentBox/>
         </div>
+
+        <div className="right-right">
+          <div class="title-bar">STAT</div>
+
+          <StatList/>
+        </div>
+
+        <div className="right">
+          <SkillZone/>
+        </div>
       </div>
     </div>;
   }
@@ -57,6 +67,39 @@ class EquipmentBox extends React.Component
         </div>
 
         <img className="centre squish" src="/imgs/shiptable/equipment/9.png"/>
+      </div>
+    </div>;
+  }
+}
+
+class StatList extends React.Component
+{
+  render()
+  {
+    return <div className="stat-list">
+
+    </div>;
+  }
+}
+
+class SkillZone extends React.Component
+{
+  render()
+  {
+    return <div className="skill-zone">
+      <SkillBox/>
+    </div>;
+  }
+}
+
+class SkillBox extends React.Component
+{
+  render()
+  {
+    return <div className="skill-box">
+      <div class="name yellow">Raid Order</div>
+      <div class="description">
+        25% activation every 20s: For 8 seconds, increases entire fleet's FP by 5% (25%). Does not stack with the same skill.
       </div>
     </div>;
   }
