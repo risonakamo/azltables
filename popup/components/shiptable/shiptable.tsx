@@ -1,7 +1,7 @@
-import ShipPortrait from "./shipportrait";
-import EquipmentBox from "./equipmentbox";
-import StatList from "./statlist";
-import SkillZone from "./skillzone";
+import ShipPortrait from "../shipportrait/shipportrait";
+import EquipmentBox from "../equipmentbox/equipmentbox";
+import StatList from "../statlist/statlist";
+import SkillZone from "../skillzone/skillzone";
 
 import "./shiptable.less";
 
