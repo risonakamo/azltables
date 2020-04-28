@@ -30,6 +30,16 @@
         color: white;
         font-size: 13px;
         padding: 2px 8px 2px 8px;
+
+        @skill-colours: @skill-yellow,@skill-blue,@skill-red;
+        @skill-classes: yellow,blue,red;
+
+        each(@skill-classes,{
+            &.@{value}
+            {
+                color: extract(@skill-colours,@index);
+            }
+        });
     }
 
     .description
