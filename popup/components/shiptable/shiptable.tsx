@@ -5,20 +5,27 @@ import SkillZone from "../skillzone/skillzone";
 
 import "./shiptable.less";
 
-/* ShipTable() */
+interface ShipTableProps
+{
+  shipdata:ShipInfo
+}
+
+/* ShipTable(ShipInfo shipdata) */
 export default class ShipTable extends React.Component
 {
+  props:ShipTableProps
+
   render()
   {
     return <div className="ship-table">
       <div className="title-box">
-        <img src="/imgs/shiptable/country/jp.png"/>
-        <a href="https://azurlane.koumakan.jp/Kasumi">Kasumi</a>
+        <img src={`/imgs/shiptable/country/${this.props.shipdata.country}.png`}/>
+        <a href={this.props.shipdata.link}>{this.props.shipdata.name}</a>
       </div>
 
       <div className="bottom">
         <div className="left">
-          <ShipPortrait/>
+          <ShipPortrait img={this.props.shipdata.image} shipclass={this.props.shipdata.class}/>
           <EquipmentBox/>
         </div>
 

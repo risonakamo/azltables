@@ -37,8 +37,14 @@ class PopupIndex extends React.Component
 
   render()
   {
+    var renderingShip;
+    if (this.state.loadedShip)
+    {
+      renderingShip=<ShipTable shipdata={this.state.loadedShip}/>;
+    }
+
     return <>
-      <ShipTable/>
+      {renderingShip}
     </>;
   }
 }
