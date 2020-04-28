@@ -36,7 +36,7 @@ export default class ShipTable extends React.Component
         </div>
 
         <div className="right">
-          <SkillZone/>
+          <SkillZone skills={this.props.shipdata.skills}/>
         </div>
       </div>
     </div>;

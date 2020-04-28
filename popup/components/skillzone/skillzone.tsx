@@ -1,23 +1,35 @@
 import "./skillzone.less";
 
+/* SkillZone(ShipSkill[] skills) */
 export default class SkillZone extends React.Component
 {
+  props:{
+    skills:ShipSkill[]
+  }
+
   render()
   {
     return <div className="skill-zone">
-      <SkillBox/>
+      {_.map(this.props.skills,(x:ShipSkill,i:number)=>{
+        return <SkillBox skill={x} key={i}/>;
+      })}
     </div>;
   }
 }
 
+/* SkillBox(ShipSkill skill) */
 class SkillBox extends React.Component
 {
+  props:{
+    skill:ShipSkill
+  }
+
   render()
   {
     return <div className="skill-box">
-      <div className="name yellow">Raid Order</div>
+      <div className={`name ${this.props.skill.colour}`}>{this.props.skill.name}</div>
       <div className="description">
-        25% activation every 20s: For 8 seconds, increases entire fleet's FP by 5% (25%). Does not stack with the same skill.
+        {this.props.skill.description}
       </div>
     </div>;
   }
