@@ -1,16 +1,17 @@
 import "./shipportrait.less";
 
-/* ShipPortrait(string img, string shipclass) */
+/* ShipPortrait(string img, ShipClass shipclass, ShipRarity shiprare) */
 export default class ShipPortrait extends React.Component
 {
   props:{
     img:string
-    shipclass:string
+    shipclass:ShipClass
+    shiprare:ShipRarity
   }
 
   render()
   {
-    return <div className="portrait-zone purple">
+    return <div className={`portrait-zone ${this.props.shiprare}`}>
       <ClassBox shipclass={this.props.shipclass}/>
       <img className="portrait" src={this.props.img}/>
     </div>;

@@ -25,8 +25,9 @@ export default class ShipTable extends React.Component
 
       <div className="bottom">
         <div className="left">
-          <ShipPortrait img={this.props.shipdata.image} shipclass={this.props.shipdata.class}/>
-          <EquipmentBox/>
+          <ShipPortrait img={this.props.shipdata.image} shipclass={this.props.shipdata.class}
+            shiprare={this.props.shipdata.rarity}/>
+          <EquipmentBox equipments={this.props.shipdata.equipment}/>
         </div>
 
         <div className="right-right">
