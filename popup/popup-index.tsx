@@ -2,11 +2,37 @@ import ShipTable from "./components/shiptable/shiptable";
 
 import "./popup-index.less";
 
+interface PopupIndexProps
+{
+
+}
+
+interface PopupIndexState
+{
+  loadedShip?:ShipInfo
+}
+
 class PopupIndex extends React.Component
 {
-  componentDidMount()
+  props:PopupIndexProps
+  state:PopupIndexState
+
+  constructor(props:PopupIndexProps)
   {
-    getShip();
+    super(props);
+
+    this.state={
+      loadedShip:undefined
+    };
+  }
+
+  async componentDidMount()
+  {
+    var gotShip=await getShip();
+    if (gotShip)
+    {
+      this.setState({loadedShip:gotShip});
+    }
   }
 
   render()
@@ -22,11 +48,26 @@ function main()
   ReactDOM.render(<PopupIndex/>,document.querySelector(".main"));
 }
 
-function getShip()
+// return a ship info from the current page, or nothing if page is not correct
+function getShip():Promise<ShipInfo|null>
 {
-  chrome.tabs.query({active:true,currentWindow:true,url:"https://azurlane.koumakan.jp/*"},(tab:any)=>{
-    chrome.tabs.executeScript({file:"popup/azlinfohook.js"},(res:any)=>{
-      console.log(res);
+  return new Promise((resolve)=>{
+    chrome.tabs.query({
+      active:true,
+      currentWindow:true,
+      url:"https://azurlane.koumakan.jp/*"
+    },(tabs:Tab[])=>{
+      if (tabs && tabs.length)
+      {
+        chrome.tabs.executeScript({file:"/popup/azlinfohook.js"},(res:ShipInfo[])=>{
+          resolve(res[0]);
+        });
+      }
+
+      else
+      {
+        resolve(null);
+      }
     });
   });
 }

@@ -25,3 +25,5 @@ declare namespace JSX
         [name:string]:any
     }
 }
+
+type Tab=any;
