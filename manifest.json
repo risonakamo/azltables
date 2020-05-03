@@ -10,5 +10,11 @@
 
     "browser_action":{
         "default_popup":"popup/popup.html"
+    },
+
+    "icons":{
+        "16":"imgs/icon/16.png",
+        "48":"imgs/icon/48.png",
+        "128":"imgs/icon/128.png"
     }
 }
