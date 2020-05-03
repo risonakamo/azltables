@@ -2,7 +2,7 @@ import "./statlist.less";
 
 // ship stats to display
 const statsNames:(keyof ShipStats)[]=["hp","gun","torpedo","dodge","planes","antiair",
-  "reload","speed","gas","armour"];
+  "reload","speed","gas","asw","armour"];
 
 interface StatListProps
 {
@@ -18,7 +18,7 @@ export default class StatList extends React.Component
   {
     return <div className="stat-list">
       {_.map(statsNames,(x:keyof ShipStats)=>{
-        return <StatBox statname={x} value={this.props.stats[x]}/>;
+        return <StatBox statname={x} value={this.props.stats[x]} key={x}/>;
       })}
     </div>;
   }

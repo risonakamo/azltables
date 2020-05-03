@@ -66,6 +66,7 @@ function getShip():Promise<ShipInfo|null>
       if (tabs && tabs.length)
       {
         chrome.tabs.executeScript({file:"/popup/azlinfohook.js"},(res:ShipInfo[])=>{
+          console.log("got ship",res[0]);
           resolve(res[0]);
         });
       }
