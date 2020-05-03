@@ -33,7 +33,7 @@ export default class ShipTable extends React.Component
         <div className="right-right">
           <div className="title-bar">STAT</div>
 
-          <StatList/>
+          <StatList stats={this.props.shipdata.stats}/>
         </div>
 
         <div className="right">
